@@ -19,7 +19,7 @@ ID_Clinica (chave primária)
 Nome 
 Endereço 
 Telefone 
-Avaliação 
+Avaliacao
 Preco_Medio 
 ```
 
@@ -28,25 +28,25 @@ Preco_Medio
   ID_Consulta (chave primária) 
   ID_Cliente (chave estrangeira) 
   ID_Clínica (chave estrangeira) 
-  dentista_id (ID do dentista responsável) 
-  Tipo_Serviço 
+  dentista_id (ID do dentista responsavel) 
+  Tipo_Servico 
   data_consulta (Data da consulta) 
   hora_consulta (Hora da consulta) 
-  tipo_consulta (Tipo de consulta: preventiva, tratamento, emergência) 
+  tipo_consulta (Tipo de consulta: preventiva, tratamento, emergencia) 
   local_consulta (Local da consulta) 
   status_consulta (Status da consulta: agendada, realizada, cancelada) 
   observacoes (Observações sobre a consulta) 
-  sintomas (Sintomas apresentados pelo usuário) 
-  tratamento_recomendado (Tratamento recomendado após a consulta) 
+  sintomas (Sintomas apresentados pelo usuario) 
+  tratamento_recomendado (Tratamento recomendado apos a consulta) 
   custo (Custo da consulta) 
-  forma_pagamento (Forma de pagamento: cartão, dinheiro, convênio) 
-  prescricao (Prescrição dada após a consulta) 
-  data_retorno (Data para retorno, se aplicável) 
+  forma_pagamento (Forma de pagamento: cartao, dinheiro, convenio) 
+  prescricao (Prescrição dada apos a consulta) 
+  data_retorno (Data para retorno, se aplicavel) 
 ```
 
 **Sinistro** (Tratativa do processo interno) 
 ```bash
-  ID_Sinistro (chave primária) 
+  ID_Sinistro (chave primaria) 
   Nome 
   Descricao
   status_sinistro (Status do sinistro: pendente, aprovado, negado) 
@@ -57,18 +57,18 @@ Preco_Medio
   documentacao (Se necessario) 
 ```
 
-**Feedback** – Precisamos pensar que um precisa para médico, outra para consulta, consultório e App. 
+**Feedback** – Precisamos pensar que um precisa para medico, outra para consulta, consultorio e App. 
 ```bash
-  ID_Feedback (chave primária) 
+  ID_Feedback (chave primaria) 
   ID_Cliente (chave estrangeira) 
   ID_Clínica (chave estrangeira) 
-  Avaliação 
-  Comentário 
+  Avaliacao 
+  Comentario 
 ```
 
 **Formulário Detalhado**
 ```bash
-  formulario_id (chave primária) 
+  formulario_id (chave primaria) 
   usuario_id (chave estrangeira) 
   historico_familiar 
   plano_odontologico 
@@ -101,7 +101,7 @@ Preco_Medio
 
 **Agenda**
 ```bash
-  ID_Agenda (chave primária) 
+  ID_Agenda (chave primaria) 
   ID_Cliente (chave estrangeira) 
   ID_Consulta (chave estrangeira) 
   Data_Consulta 
@@ -112,11 +112,64 @@ Preco_Medio
 
 **Notificacoes**
 ```bash
-ID_Notificacao (chave primária) 
+ID_Notificacao (chave primaria) 
 ID_Cliente (chave estrangeira) 
 Tipo_Notificacao 
 Mensagem 
 Data_Envio 
 Status_Notificacao 
 ```
+
+# Relacionamentos 
+
+**Cliente e Consulta**
+
+Tipo: 1:N (Um cliente pode ter várias consultas) 
+**Descrição:** Cada cliente pode agendar múltiplas consultas ao longo do tempo. 
+
+**Clínica e Consulta**
+
+Tipo: 1:N (Uma clínica pode ter várias consultas) 
+**Descrição:** Cada clínica pode atender a vários clientes em diferentes consultas. 
+
+**Consulta e Sinistro**
+
+Tipo: N:1 (Várias consultas podem estar associadas a um sinistro) 
+**Descrição:** Uma consulta pode gerar um sinistro (por exemplo, quando um tratamento é necessário), mas cada sinistro está associado a uma única consulta. 
+
+**Cliente e Feedback**
+
+Tipo: 1:N (Um cliente pode deixar vários feedbacks) 
+**Descrição:** Cada cliente pode fornecer feedback sobre diversas clínicas, consultas e até mesmo sobre o aplicativo. 
+
+**Clínica e Feedback**
+
+Tipo: 1:N (Uma clínica pode receber vários feedbacks) 
+**Descrição:** Cada clínica pode receber feedback de vários clientes. 
+
+**Formulário Detalhado e Usuário**
+
+Tipo: 1:1 (Um formulário detalhado é associado a um único usuário) 
+**Descrição:** Cada usuário tem um formulário personalizado que coleta informações detalhadas sobre sua saúde e histórico. 
+
+**Agenda e Cliente**
+
+Tipo: N:1 (Muitos agendamentos podem estar associados a um único cliente) 
+**Descrição:** Cada agendamento é relacionado a um cliente específico, que pode ter vários agendamentos. 
+
+**Agenda e Consulta**
+
+Tipo: N:1 (Muitos agendamentos podem estar associados a uma única consulta) 
+**Descrição:** Cada agendamento está vinculado a uma consulta específica, mas uma consulta pode ser referenciada em diferentes agendamentos (como retornos). 
+
+**Notificacoes e Cliente**
+
+Tipo: N:1 (Muitas notificações podem estar associadas a um único cliente) 
+**Descrição:** Cada notificação é enviada a um cliente específico, que pode receber várias notificações. 
+
+ 
+
+ 
+
+ 
 

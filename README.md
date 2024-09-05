@@ -3,7 +3,7 @@
 # Challenge Odontoprev 
 <p align="center">  <img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>  </p>
 
-Repositório criado para a organização e hospedagem dos projetos de Challenge da FIAP, correspondentes à sprint 1 e 2.
+Repositório criado para a organização e hospedagem dos projetos de Challenge da FIAP, correspondente à sprint 1.
 
 ## Índice
  * [Challenge Odontoprev](#challenge-odontoprev)

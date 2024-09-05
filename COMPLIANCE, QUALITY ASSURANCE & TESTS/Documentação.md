@@ -108,17 +108,23 @@ Nenhum produto oferece uma solução completa e integrada como a proposta que es
 
 **Exemplo dos dados que foram coletados:**
 
-  $ https://www.camara.leg.br/radio/programas/1074177-ans-divulga-dados-sobre-os-planos-de saude/#:~:text=Dados%20divulgados%20pela%20Ag%C3%AAncia%20Nacional,no%20ritmo%20pretendido%20pelas%20operadoras. 
+'''bash
+  https://www.camara.leg.br/radio/programas/1074177-ans-divulga-dados-sobre-os-planos-de saude/#:~:text=Dados%20divulgados%20pela%20Ag%C3%AAncia%20Nacional,no%20ritmo%20pretendido%20pelas%20operadoras. 
+'''
 
 Dados divulgados pela Agência Nacional de Saúde Suplementar mostram que o setor teve lucro líquido de R$ 3,3 bilhões nos primeiros três meses do ano. Em 2023, havia sido de R$ 1,2 bilhão. Para a ANS, os números revelam uma recuperação do setor, ainda que não no ritmo pretendido pelas operadoras. A divulgação acontece após várias notícias sobre cancelamento de planos de forma unilateral pelas operadoras. Elas alegavam justamente a necessidade de equilíbrio das contas. Para saber a situação do seu plano, basta acessar o Painel Econômico-Financeiro da Saúde Suplementar na página da ANS. 
 
-  $ https://www.gov.br/ans/pt-br/acesso-a-informacao/perfil-do-setor/dados-e-indicadores-do-setor 
+'''bash
+  https://www.gov.br/ans/pt-br/acesso-a-informacao/perfil-do-setor/dados-e-indicadores-do-setor 
+'''
 
 No Gov tem várias bases de dados que podemos usar para alimentar a IA. Nem precisamos de mais nada além disso. 
 
 Os inserts que vamos fazer no banco, será com base em API: 
 
- $ https://www.ans.gov.br/anstabnet/cgi-bin/dh?dados/tabnet_cc.def 
+'''bash
+https://www.ans.gov.br/anstabnet/cgi-bin/dh?dados/tabnet_cc.def 
+'''
 
 Veja as tabelas no link acima, tem muita coisa. Então vamos bater um número de colunas consideravel. 
 

@@ -123,50 +123,72 @@ Status_Notificacao
 # Relacionamentos 
 
 **Cliente e Consulta**
-
+```bash
 Tipo: 1:N (Um cliente pode ter várias consultas) 
 **Descrição:** Cada cliente pode agendar múltiplas consultas ao longo do tempo. 
+```
 
 **Clínica e Consulta**
-
+```bash
 Tipo: 1:N (Uma clínica pode ter várias consultas) 
 **Descrição:** Cada clínica pode atender a vários clientes em diferentes consultas. 
+```
 
 **Consulta e Sinistro**
-
+```bash
 Tipo: N:1 (Várias consultas podem estar associadas a um sinistro) 
 **Descrição:** Uma consulta pode gerar um sinistro (por exemplo, quando um tratamento é necessário), mas cada sinistro está associado a uma única consulta. 
+```
 
 **Cliente e Feedback**
-
+```bash
 Tipo: 1:N (Um cliente pode deixar vários feedbacks) 
 **Descrição:** Cada cliente pode fornecer feedback sobre diversas clínicas, consultas e até mesmo sobre o aplicativo. 
+```
 
 **Clínica e Feedback**
-
+```bash
 Tipo: 1:N (Uma clínica pode receber vários feedbacks) 
 **Descrição:** Cada clínica pode receber feedback de vários clientes. 
+```
 
 **Formulário Detalhado e Usuário**
-
+```bash
 Tipo: 1:1 (Um formulário detalhado é associado a um único usuário) 
 **Descrição:** Cada usuário tem um formulário personalizado que coleta informações detalhadas sobre sua saúde e histórico. 
+```
 
 **Agenda e Cliente**
-
+```bash
 Tipo: N:1 (Muitos agendamentos podem estar associados a um único cliente) 
 **Descrição:** Cada agendamento é relacionado a um cliente específico, que pode ter vários agendamentos. 
+```
 
 **Agenda e Consulta**
-
+```bash
 Tipo: N:1 (Muitos agendamentos podem estar associados a uma única consulta) 
 **Descrição:** Cada agendamento está vinculado a uma consulta específica, mas uma consulta pode ser referenciada em diferentes agendamentos (como retornos). 
+```
 
 **Notificacoes e Cliente**
-
+```bash
 Tipo: N:1 (Muitas notificações podem estar associadas a um único cliente) 
 **Descrição:** Cada notificação é enviada a um cliente específico, que pode receber várias notificações. 
+```
 
+## Resumo dos Relacionamentos 
+
+Cliente (1) — (N) Consulta – JAVA ONETOMANY 
+Clínica (1) — (N) Consulta ONETOMANY 
+Consulta (N) — (1) Sinistro MANYTOONE 
+Cliente (1) — (N) Feedback ONETOMANY 
+Clínica (1) — (N) Feedback ONETOMANY 
+Usuário (1) — (1) Formulário Detalhado ONETOONE 
+Agenda (N) — (1) Cliente MANYTOONE
+Agenda (N) — (1) Consulta MANYTOONE
+Notificacoes (N) — (1) Cliente MANYTOONE
+
+ 
  
 
  

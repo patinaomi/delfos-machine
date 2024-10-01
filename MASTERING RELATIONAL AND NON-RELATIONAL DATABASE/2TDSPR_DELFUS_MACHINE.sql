@@ -16,7 +16,6 @@ DROP TABLE Clinica CASCADE CONSTRAINTS;
 DROP TABLE Cliente CASCADE CONSTRAINTS;
 DROP TABLE Estado_Civil CASCADE CONSTRAINTS;
 DROP TABLE Tipo_Notificacao CASCADE CONSTRAINTS;
-DROP TABLE Status_Notificacao CASCADE CONSTRAINTS;
 
 -- Criação das Tabelas
 
@@ -88,6 +87,7 @@ CREATE TABLE Consulta (
 -- Tabela Sinistro
 CREATE TABLE Sinistro (
     id_sinistro INTEGER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    id_consulta INTEGER NOT NULL, 
     nome VARCHAR2(100) NOT NULL,
     descricao VARCHAR2(250),
     status_sinistro CHAR(1), -- 'S' ou 'N'
@@ -95,7 +95,9 @@ CREATE TABLE Sinistro (
     valor_sinistro DECIMAL(10, 2),
     data_abertura DATE NOT NULL,
     data_resolucao DATE,
-    documentacao VARCHAR2(250)
+    documentacao VARCHAR2(250),
+    
+    CONSTRAINT fk_sinistro_consulta FOREIGN KEY (id_consulta) REFERENCES Consulta(id_consulta)
 );
 
 -- Tabela Feedback
@@ -148,13 +150,7 @@ CREATE TABLE Formulario_Detalhado (
 -- Tabela Tipo Notificação
 CREATE TABLE Tipo_Notificacao (
     id_tipo_notificacao INTEGER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
-    descricao VARCHAR2(20) NOT NULL
-);
-
--- Tabela Status Notificação
-CREATE TABLE Status_Notificacao (
-    id_status_notificacao INTEGER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
-    descricao VARCHAR2(20) NOT NULL -- 'Enviada', 'Pendente', 'Falha'
+    descricao VARCHAR2(40) NOT NULL
 );
 
 -- Tabela Agenda
@@ -176,11 +172,9 @@ CREATE TABLE Notificacao (
     id_notificacao INTEGER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     id_cliente INTEGER NOT NULL,
     id_tipo_notificacao INTEGER NOT NULL,
-    id_status_notificacao INTEGER NOT NULL,
     mensagem VARCHAR2(250),
     data_envio DATE,
 
     CONSTRAINT fk_notificacao_cliente FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
-    CONSTRAINT fk_notificacao_tipo FOREIGN KEY (id_tipo_notificacao) REFERENCES Tipo_Notificacao(id_tipo_notificacao),
-    CONSTRAINT fk_notificacao_status_notificacao FOREIGN KEY (id_status_notificacao) REFERENCES Status_Notificacao(id_status_notificacao)
+    CONSTRAINT fk_notificacao_tipo FOREIGN KEY (id_tipo_notificacao) REFERENCES Tipo_Notificacao(id_tipo_notificacao)
 );

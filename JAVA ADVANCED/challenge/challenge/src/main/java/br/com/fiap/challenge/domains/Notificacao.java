@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -33,6 +34,5 @@ public class Notificacao {
     private String mensagem;
 
     @Column(name = "data_envio")
-    @Temporal(TemporalType.DATE)
-    private Date dataEnvio;
+    private LocalDate dataEnvio;
 }

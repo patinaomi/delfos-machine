@@ -6,7 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,8 +35,7 @@ public class Cliente {
     private String telefone;
 
     @Column(name = "data_nasc", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dataNasc;
+    private LocalDate dataNasc;
 
     @Column(name = "endereco", length = 255, nullable = false)
     private String endereco;

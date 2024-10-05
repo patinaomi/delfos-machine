@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @Builder
@@ -21,4 +23,5 @@ public class Especialidade {
 
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;
+
 }

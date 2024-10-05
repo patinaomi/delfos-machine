@@ -7,7 +7,6 @@ import br.com.fiap.challenge.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,17 +14,17 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping(value = "/clientes", produces = "application/json")
 @RequiredArgsConstructor
-@Validated
 @Tag(name = "cliente", description = "Operações relacionadas a clientes")
 public class ClienteController {
+
     private final ClienteService clienteService;
 
     @Operation(
@@ -38,18 +37,17 @@ public class ClienteController {
             @ApiResponse(responseCode = "400", description = "Requisição inválida", content = @Content),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content)
     })
-
-    @PostMapping("/cadastrar")
+    @PostMapping("/criar")
     public ResponseEntity<ClienteResponse> criar(@Valid @RequestBody ClienteRequest clienteRequest) {
+        System.out.println(clienteRequest); // Adicione logs para depuração
         Cliente cliente = Cliente.builder()
-        cliente.setNome(clienteRequest.getNome());
-        cliente.setSobrenome(clienteRequest.getSobrenome());
-        cliente.setEmail(clienteRequest.getEmail());
-        cliente.setTelefone(clienteRequest.getTelefone());
-        cliente.setDataNasc(clienteRequest.getDataNasc());
-        cliente.setEndereco(clienteRequest.getEndereco())
+                .nome(clienteRequest.getNome())
+                .sobrenome(clienteRequest.getSobrenome())
+                .email(clienteRequest.getEmail())
+                .telefone(clienteRequest.getTelefone())
+                .dataNasc(clienteRequest.getDataNasc())
+                .endereco(clienteRequest.getEndereco())
                 .build();
-
 
         Cliente clienteSalvo = clienteService.criar(cliente);
 
@@ -61,9 +59,7 @@ public class ClienteController {
                 .dataNasc(clienteSalvo.getDataNasc())
                 .endereco(clienteSalvo.getEndereco())
                 .build();
+
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteResponse);
     }
-
-
-
 }

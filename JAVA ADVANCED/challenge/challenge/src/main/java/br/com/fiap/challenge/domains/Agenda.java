@@ -19,7 +19,7 @@ public class Agenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_agenda", nullable = false)
-    private String idAgenda;
+    private Long idAgenda;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", nullable = false)
@@ -29,7 +29,6 @@ public class Agenda {
     @JoinColumn(name = "id_consulta", nullable = false)
     private Consulta consulta;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_consulta", nullable = false)
     private Timestamp dataConsulta;
 
@@ -38,6 +37,5 @@ public class Agenda {
 
     @Column(name = "observacoes", length = 250)
     private String observacoes;
-
 
 }

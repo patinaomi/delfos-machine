@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @Builder
@@ -21,4 +23,5 @@ public class EstadoCivil {
 
     @Column(name = "descricao", length = 50, nullable = false)
     private String descricao;
+
 }

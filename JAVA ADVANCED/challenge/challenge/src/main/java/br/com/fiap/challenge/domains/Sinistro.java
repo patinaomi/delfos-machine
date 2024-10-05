@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -40,13 +41,11 @@ public class Sinistro {
     @Column(name = "valor_sinistro")
     private Double valorSinistro;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "data_abertura")
-    private Date dataAbertura;
+    private LocalDate dataAbertura;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "data_resolucao")
-    private Date dataResolucao;
+    private LocalDate dataResolucao;
 
     @Column(name = "documentacao", length = 250)
     private String documentacao;

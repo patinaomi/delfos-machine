@@ -2,7 +2,7 @@ package br.com.fiap.challenge.gateways.response;
 
 import lombok.Builder;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Builder
 public record ClienteResponse(
@@ -10,7 +10,7 @@ public record ClienteResponse(
         String sobrenome,
         String email,
         String telefone,
-        Date dataNasc,
+        LocalDate dataNasc,
         String endereco
 )
 {

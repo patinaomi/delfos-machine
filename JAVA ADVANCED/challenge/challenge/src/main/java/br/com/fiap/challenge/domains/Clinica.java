@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -33,4 +35,5 @@ public class Clinica {
 
     @Column(name = "preco_medio")
     private Double precoMedio;
+
 }

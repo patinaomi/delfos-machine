@@ -5,7 +5,9 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,8 +38,7 @@ public class Consulta {
     private String tipoServico;
 
     @Column(name = "data_consulta", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dataConsulta;
+    private LocalDate dataConsulta;
 
     @Column(name = "status_consulta", length = 1)
     private char statusConsulta;
@@ -52,13 +53,11 @@ public class Consulta {
     private String tratamentoRecomendado;
 
     @Column(name = "custo")
-    private double custo;
+    private Double custo;
 
     @Column(name = "prescricao", length = 250)
     private String prescricao;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "data_retorno")
-    private Date dataRetorno;
-
+    private LocalDate dataRetorno;
 }

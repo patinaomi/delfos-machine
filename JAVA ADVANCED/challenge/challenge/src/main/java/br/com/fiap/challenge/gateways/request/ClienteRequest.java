@@ -6,40 +6,34 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 public class ClienteRequest {
-    @NotNull(message = "O ID do cliente não pode ser nulo")
-    Long idCliente;
 
     @NotNull(message = "O nome do cliente não pode ser nulo")
     @Size(max = 100, message = "O nome do cliente deve ter no máximo 100 caracteres")
-    String nome;
+    private String nome;
 
     @NotNull(message = "O sobrenome do cliente não pode ser nulo")
     @Size(max = 100, message = "O sobrenome do cliente deve ter no máximo 100 caracteres")
-    String sobrenome;
+    private String sobrenome;
 
     @NotNull(message = "O email do cliente não pode ser nulo")
     @Email(message = "O email do cliente não é válido")
     @Size(max = 100, message = "O e-mail do cliente deve ter no máximo 100 caracteres")
-    String email;
+    private String email;
 
     @NotNull(message = "O telefone do cliente não pode ser nulo")
     @Size(max = 15, message = "O telefone do cliente deve ter no máximo 15 caracteres")
-    String telefone;
+    private String telefone;
 
     @NotNull(message = "A data de nascimento do cliente não pode ser nula")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    Date dataNasc;
+    private LocalDate dataNasc;
 
     @NotNull(message = "O endereço do cliente não pode ser nulo")
-    @Size(max = 255, message = "O endereço do dentista deve ter no máximo 255 caracteres")
-    String endereco;
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone != null ? telefone.replaceAll("\\D", "") : null;
-    }
+    @Size(max = 255, message = "O endereço do cliente deve ter no máximo 255 caracteres")
+    private String endereco;
 
 }

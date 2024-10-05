@@ -3,7 +3,6 @@ package br.com.fiap.challenge.service.impl;
 import br.com.fiap.challenge.domains.Cliente;
 import br.com.fiap.challenge.gateways.repository.ClienteRepository;
 import br.com.fiap.challenge.service.ClienteService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +15,8 @@ public class ClienteServiceImpl implements ClienteService {
     private final ClienteRepository clienteRepository;
 
     @Override
-    public Cliente criar(@Valid ClienteRequest cliente) {
-        cliente.telefone(limparCaracteresTel(cliente.telefone()));
+    public Cliente criar(Cliente cliente) {
+        cliente.setTelefone(limparCaracteresTel(cliente.getTelefone())); // Limpeza do telefone antes de salvar
         return clienteRepository.save(cliente);
     }
 
@@ -36,6 +35,7 @@ public class ClienteServiceImpl implements ClienteService {
     public Cliente atualizar(Long id, Cliente cliente) {
         if (clienteRepository.existsById(id)) {
             cliente.setIdCliente(id);
+            cliente.setTelefone(limparCaracteresTel(cliente.getTelefone())); // Limpeza do telefone antes de atualizar
             return clienteRepository.save(cliente);
         } else {
             throw new RuntimeException("Cliente não encontrado");
@@ -51,8 +51,8 @@ public class ClienteServiceImpl implements ClienteService {
         }
     }
 
-    // Aqui tudo que não for número é removido do telefone, pra que seja salvo no banco de dados apenas os números
+    // Método utilitário para limpar caracteres não numéricos do telefone
     private String limparCaracteresTel(String telefone) {
-        return telefone.replaceAll("\\D", "");
+        return telefone != null ? telefone.replaceAll("\\D", "") : null;
     }
 }

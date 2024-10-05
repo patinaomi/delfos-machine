@@ -32,7 +32,7 @@ public class FormularioDetalhado {
     @Column(name = "profissao", length = 100)
     private String profissao;
 
-    @Column(name = "renda_mensal", precision = 10, scale = 2)
+    @Column(name = "renda_mensal")
     private Double rendaMensal;
 
     @Column(name = "historico_medico", length = 250)

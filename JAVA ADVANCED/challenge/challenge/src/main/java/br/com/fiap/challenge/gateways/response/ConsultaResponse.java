@@ -6,7 +6,6 @@ import br.com.fiap.challenge.domains.Dentista;
 import lombok.Builder;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Builder
 public record ConsultaResponse(

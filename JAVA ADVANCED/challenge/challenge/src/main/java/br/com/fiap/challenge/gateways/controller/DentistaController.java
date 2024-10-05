@@ -2,6 +2,7 @@ package br.com.fiap.challenge.gateways.controller;
 
 import br.com.fiap.challenge.domains.Dentista;
 import br.com.fiap.challenge.gateways.request.DentistaRequest;
+import br.com.fiap.challenge.gateways.request.DentistaUpdateRequest;
 import br.com.fiap.challenge.gateways.response.DentistaResponse;
 import br.com.fiap.challenge.service.DentistaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -122,6 +123,40 @@ public class DentistaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dentista com ID " + id + " não encontrado.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao deletar dentista: " + e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Atualizar campos específicos do dentista", description = "Atualiza campos específicos de um dentista com base no ID fornecido")
+    @PatchMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Dentista atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Dentista não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+    public ResponseEntity<?> atualizarParcialmente(@PathVariable Long id, @RequestBody DentistaUpdateRequest dentistaUpdateRequest) {
+        try {
+            Dentista dentista = dentistaService.buscarPorId(id);
+
+            // Atualiza apenas os campos fornecidos no request
+            if (dentistaUpdateRequest.getNome() != null) {
+                dentista.setNome(dentistaUpdateRequest.getNome());
+            }
+            if (dentistaUpdateRequest.getSobrenome() != null) {
+                dentista.setSobrenome(dentistaUpdateRequest.getSobrenome());
+            }
+            if (dentistaUpdateRequest.getTelefone() != null) {
+                dentista.setTelefone(dentistaUpdateRequest.getTelefone());
+            }
+            if (dentistaUpdateRequest.getAvaliacao() != null) {
+                dentista.setAvaliacao(dentistaUpdateRequest.getAvaliacao());
+            }
+
+            Dentista dentistaAtualizado = dentistaService.atualizar(id, dentista);
+            return ResponseEntity.ok(dentistaAtualizado);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dentista com ID " + id + " não encontrado.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar dentista: " + e.getMessage());
         }
     }
 

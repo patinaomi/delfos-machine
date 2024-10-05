@@ -16,6 +16,7 @@ public class DentistaServiceImpl implements DentistaService {
 
     @Override
     public Dentista criar(Dentista dentista) {
+        dentista.setTelefone(limparCaracteresTel(dentista.getTelefone()));
         return dentistaRepository.save(dentista);
     }
 
@@ -47,5 +48,10 @@ public class DentistaServiceImpl implements DentistaService {
         } else {
             throw new RuntimeException("Dentista não encontrado");
         }
+    }
+
+    // Método utilitário para limpar caracteres não numéricos do telefone
+    private String limparCaracteresTel(String telefone) {
+        return telefone != null ? telefone.replaceAll("\\D", "") : null;
     }
 }

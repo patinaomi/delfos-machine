@@ -3,6 +3,7 @@ package br.com.fiap.challenge.domains;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -51,20 +52,19 @@ public class FormularioDetalhado {
     private String familiarComDoencasDentarias;
 
     @Column(name = "participacao_em_programas_preventivos", length = 1)
-    private char participacaoEmProgramasPreventivos;
+    private Character participacaoEmProgramasPreventivos;
 
     @Column(name = "contato_emergencial", length = 250)
     private String contatoEmergencial;
 
     @Column(name = "pesquisa_satisfacao", length = 1)
-    private char pesquisaSatisfacao;
+    private Character pesquisaSatisfacao;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "data_ultima_atualizacao")
-    private Date dataUltimaAtualizacao;
+    private LocalDate dataUltimaAtualizacao;
 
     @Column(name = "frequencia_consulta_periodica", length = 1)
-    private char frequenciaConsultaPeriodica;
+    private Character frequenciaConsultaPeriodica;
 
     @Column(name = "sinalizacao_de_risco", length = 250)
     private String sinalizacaoDeRisco;

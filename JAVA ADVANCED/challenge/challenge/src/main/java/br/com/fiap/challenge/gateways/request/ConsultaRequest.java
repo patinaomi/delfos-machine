@@ -25,7 +25,7 @@ public class ConsultaRequest {
     @NotNull(message = "Data da consulta não pode ser nula")
     private LocalDate dataConsulta;
 
-    private char statusConsulta;
+    private Character statusConsulta;
     private String observacoes;
     private String sintomas;
     private String tratamentoRecomendado;

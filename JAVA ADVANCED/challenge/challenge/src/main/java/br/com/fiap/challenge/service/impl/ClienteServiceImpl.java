@@ -16,7 +16,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente criar(Cliente cliente) {
-        cliente.setTelefone(limparCaracteresTel(cliente.getTelefone())); // Limpeza do telefone antes de salvar
+        cliente.setTelefone(limparCaracteresTel(cliente.getTelefone()));
         return clienteRepository.save(cliente);
     }
 

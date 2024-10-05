@@ -1,22 +1,12 @@
 package br.com.fiap.challenge.gateways.request;
 
-import br.com.fiap.challenge.domains.Cliente;
-import br.com.fiap.challenge.domains.EstadoCivil;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
-public class FormularioDetalhadoRequest {
+public class FormularioDetalhadoUpdateRequest {
 
-    @NotNull(message = "Cliente não pode ser nulo")
-    private Cliente cliente;
-
-    @NotNull(message = "Estado civil não pode ser nulo")
-    private EstadoCivil estadoCivil;
-
-    private String historicoFamiliar;
     private String profissao;
     private Double rendaMensal;
     private String historicoMedico;

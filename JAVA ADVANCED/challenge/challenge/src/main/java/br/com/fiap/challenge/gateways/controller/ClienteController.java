@@ -2,6 +2,7 @@ package br.com.fiap.challenge.gateways.controller;
 
 import br.com.fiap.challenge.domains.Cliente;
 import br.com.fiap.challenge.gateways.request.ClienteRequest;
+import br.com.fiap.challenge.gateways.request.ClienteUpdateRequest;
 import br.com.fiap.challenge.gateways.response.ClienteResponse;
 import br.com.fiap.challenge.service.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -124,6 +125,47 @@ public class ClienteController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID " + id + " não encontrado.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao deletar cliente: " + e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Atualizar campos específicos do cliente", description = "Atualiza campos específicos de um cliente com base no ID fornecido")
+    @PatchMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cliente atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Cliente não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+
+    public ResponseEntity<?> atualizarParcialmente(@PathVariable Long id, @RequestBody ClienteUpdateRequest clienteUpdateRequest) {
+        try {
+            Cliente cliente = clienteService.buscarPorId(id);
+
+            // Atualiza apenas os campos fornecidos que forem fornecidos no request
+            if (clienteUpdateRequest.getNome() != null) {
+                cliente.setNome(clienteUpdateRequest.getNome());
+            }
+            if (clienteUpdateRequest.getSobrenome() != null) {
+                cliente.setSobrenome(clienteUpdateRequest.getSobrenome());
+            }
+            if (clienteUpdateRequest.getEmail() != null) {
+                cliente.setEmail(clienteUpdateRequest.getEmail());
+            }
+            if (clienteUpdateRequest.getTelefone() != null) {
+                cliente.setTelefone(clienteUpdateRequest.getTelefone());
+            }
+            if (clienteUpdateRequest.getDataNasc() != null) {
+                cliente.setDataNasc(clienteUpdateRequest.getDataNasc());
+            }
+            if (clienteUpdateRequest.getEndereco() != null) {
+                cliente.setEndereco(clienteUpdateRequest.getEndereco());
+            }
+
+            Cliente clienteAtualizado = clienteService.atualizar(id, cliente);
+            return ResponseEntity.ok(clienteAtualizado);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID " + id + " não encontrado.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar cliente: " + e.getMessage());
         }
     }
 

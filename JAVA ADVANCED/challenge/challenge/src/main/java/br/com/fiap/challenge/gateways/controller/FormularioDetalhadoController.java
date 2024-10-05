@@ -2,6 +2,7 @@ package br.com.fiap.challenge.gateways.controller;
 
 import br.com.fiap.challenge.domains.FormularioDetalhado;
 import br.com.fiap.challenge.gateways.request.FormularioDetalhadoRequest;
+import br.com.fiap.challenge.gateways.request.FormularioDetalhadoUpdateRequest;
 import br.com.fiap.challenge.gateways.response.FormularioDetalhadoResponse;
 import br.com.fiap.challenge.service.FormularioDetalhadoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -161,6 +163,38 @@ public class FormularioDetalhadoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Formulário com ID " + id + " não encontrado.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao deletar formulário: " + e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Atualizar campos específicos do formulário detalhado", description = "Atualiza campos específicos de um formulário detalhado com base no ID fornecido")
+    @PatchMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Formulário atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Formulário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+    public ResponseEntity<?> atualizarParcialmente(@PathVariable Long id, @RequestBody FormularioDetalhadoUpdateRequest formularioDetalhadoUpdateRequest) {
+        try {
+            FormularioDetalhado formulario = formularioDetalhadoService.buscarPorId(id);
+
+            // Atualiza apenas os campos fornecidos no request
+            if (formularioDetalhadoUpdateRequest.getProfissao() != null) {
+                formulario.setProfissao(formularioDetalhadoUpdateRequest.getProfissao());
+            }
+            if (formularioDetalhadoUpdateRequest.getRendaMensal() != null) {
+                formulario.setRendaMensal(formularioDetalhadoUpdateRequest.getRendaMensal());
+            }
+            if (formularioDetalhadoUpdateRequest.getHistoricoMedico() != null) {
+                formulario.setHistoricoMedico(formularioDetalhadoUpdateRequest.getHistoricoMedico());
+            }
+            // Continue para todos os outros campos necessários...
+
+            FormularioDetalhado formularioAtualizado = formularioDetalhadoService.atualizar(id, formulario);
+            return ResponseEntity.ok(formularioAtualizado);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Formulário com ID " + id + " não encontrado.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar formulário: " + e.getMessage());
         }
     }
 }

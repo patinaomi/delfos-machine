@@ -1,13 +1,9 @@
 package br.com.fiap.challenge.domains;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,7 +37,7 @@ public class Consulta {
     private LocalDate dataConsulta;
 
     @Column(name = "status_consulta", length = 1)
-    private char statusConsulta;
+    private Character statusConsulta;
 
     @Column(name = "observacoes", length = 250)
     private String observacoes;

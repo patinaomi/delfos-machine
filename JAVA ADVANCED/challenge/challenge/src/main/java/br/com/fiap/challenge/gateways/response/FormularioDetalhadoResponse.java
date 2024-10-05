@@ -4,7 +4,7 @@ import br.com.fiap.challenge.domains.Cliente;
 import br.com.fiap.challenge.domains.EstadoCivil;
 import lombok.Builder;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Builder
 public record FormularioDetalhadoResponse(
@@ -22,7 +22,7 @@ public record FormularioDetalhadoResponse(
         char participacaoEmProgramasPreventivos,
         String contatoEmergencial,
         char pesquisaSatisfacao,
-        Date dataUltimaAtualizacao,
+        LocalDate dataUltimaAtualizacao,
         char frequenciaConsultaPeriodica,
         String sinalizacaoDeRisco,
         String historicoDeViagem,

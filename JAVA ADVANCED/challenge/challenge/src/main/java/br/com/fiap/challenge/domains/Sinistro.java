@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -33,7 +32,7 @@ public class Sinistro {
     private String descricao;
 
     @Column(name = "status_sinistro", length = 1)
-    private char statusSinistro;
+    private Character statusSinistro;
 
     @Column(name = "descricao_status", length = 250)
     private String descricaoStatus;

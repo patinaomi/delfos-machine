@@ -1,7 +1,6 @@
 package br.com.fiap.challenge.service;
 
 import br.com.fiap.challenge.domains.Cliente;
-import jakarta.validation.Valid;
 
 import java.util.List;
 

@@ -2,6 +2,7 @@ package br.com.fiap.challenge.gateways.controller;
 
 import br.com.fiap.challenge.domains.Consulta;
 import br.com.fiap.challenge.gateways.request.ConsultaRequest;
+import br.com.fiap.challenge.gateways.request.ConsultaUpdateRequest;
 import br.com.fiap.challenge.gateways.response.ConsultaResponse;
 import br.com.fiap.challenge.service.ConsultaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -140,6 +141,55 @@ public class ConsultaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Consulta com ID " + id + " não encontrada.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao deletar consulta: " + e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Atualizar campos específicos da consulta", description = "Atualiza campos específicos de uma consulta com base no ID fornecido")
+    @PatchMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Consulta atualizada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Consulta não encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+    public ResponseEntity<?> atualizarParcialmente(@PathVariable Long id, @RequestBody ConsultaUpdateRequest consultaUpdateRequest) {
+        try {
+            Consulta consulta = consultaService.buscarPorId(id);
+
+            // Atualiza apenas os campos fornecidos no request
+            if (consultaUpdateRequest.getTipoServico() != null) {
+                consulta.setTipoServico(consultaUpdateRequest.getTipoServico());
+            }
+            if (consultaUpdateRequest.getDataConsulta() != null) {
+                consulta.setDataConsulta(consultaUpdateRequest.getDataConsulta());
+            }
+            if (consultaUpdateRequest.getStatusConsulta() != null) {
+                consulta.setStatusConsulta(consultaUpdateRequest.getStatusConsulta());
+            }
+            if (consultaUpdateRequest.getObservacoes() != null) {
+                consulta.setObservacoes(consultaUpdateRequest.getObservacoes());
+            }
+            if (consultaUpdateRequest.getSintomas() != null) {
+                consulta.setSintomas(consultaUpdateRequest.getSintomas());
+            }
+            if (consultaUpdateRequest.getTratamentoRecomendado() != null) {
+                consulta.setTratamentoRecomendado(consultaUpdateRequest.getTratamentoRecomendado());
+            }
+            if (consultaUpdateRequest.getCusto() != null) {
+                consulta.setCusto(consultaUpdateRequest.getCusto());
+            }
+            if (consultaUpdateRequest.getPrescricao() != null) {
+                consulta.setPrescricao(consultaUpdateRequest.getPrescricao());
+            }
+            if (consultaUpdateRequest.getDataRetorno() != null) {
+                consulta.setDataRetorno(consultaUpdateRequest.getDataRetorno());
+            }
+
+            Consulta consultaAtualizada = consultaService.atualizar(id, consulta);
+            return ResponseEntity.ok(consultaAtualizada);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Consulta com ID " + id + " não encontrada.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar consulta: " + e.getMessage());
         }
     }
 }

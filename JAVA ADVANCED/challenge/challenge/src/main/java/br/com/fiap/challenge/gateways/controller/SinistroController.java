@@ -2,6 +2,7 @@ package br.com.fiap.challenge.gateways.controller;
 
 import br.com.fiap.challenge.domains.Sinistro;
 import br.com.fiap.challenge.gateways.request.SinistroRequest;
+import br.com.fiap.challenge.gateways.request.SinistroUpdateRequest;
 import br.com.fiap.challenge.gateways.response.SinistroResponse;
 import br.com.fiap.challenge.service.SinistroService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -131,6 +132,52 @@ public class SinistroController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Sinistro com ID " + id + " não encontrado.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao deletar sinistro: " + e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Atualizar campos específicos do sinistro", description = "Atualiza campos específicos de um sinistro com base no ID fornecido")
+    @PatchMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Sinistro atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Sinistro não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+    public ResponseEntity<?> atualizarParcialmente(@PathVariable Long id, @RequestBody SinistroUpdateRequest sinistroUpdateRequest) {
+        try {
+            Sinistro sinistro = sinistroService.buscarPorId(id);
+
+            // Atualiza apenas os campos fornecidos no request
+            if (sinistroUpdateRequest.getNome() != null) {
+                sinistro.setNome(sinistroUpdateRequest.getNome());
+            }
+            if (sinistroUpdateRequest.getDescricao() != null) {
+                sinistro.setDescricao(sinistroUpdateRequest.getDescricao());
+            }
+            if (sinistroUpdateRequest.getStatusSinistro() != null) {
+                sinistro.setStatusSinistro(sinistroUpdateRequest.getStatusSinistro());
+            }
+            if (sinistroUpdateRequest.getDescricaoStatus() != null) {
+                sinistro.setDescricaoStatus(sinistroUpdateRequest.getDescricaoStatus());
+            }
+            if (sinistroUpdateRequest.getValorSinistro() != null) {
+                sinistro.setValorSinistro(sinistroUpdateRequest.getValorSinistro());
+            }
+            if (sinistroUpdateRequest.getDataAbertura() != null) {
+                sinistro.setDataAbertura(sinistroUpdateRequest.getDataAbertura());
+            }
+            if (sinistroUpdateRequest.getDataResolucao() != null) {
+                sinistro.setDataResolucao(sinistroUpdateRequest.getDataResolucao());
+            }
+            if (sinistroUpdateRequest.getDocumentacao() != null) {
+                sinistro.setDocumentacao(sinistroUpdateRequest.getDocumentacao());
+            }
+
+            Sinistro sinistroAtualizado = sinistroService.atualizar(id, sinistro);
+            return ResponseEntity.ok(sinistroAtualizado);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Sinistro com ID " + id + " não encontrado.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar sinistro: " + e.getMessage());
         }
     }
 }

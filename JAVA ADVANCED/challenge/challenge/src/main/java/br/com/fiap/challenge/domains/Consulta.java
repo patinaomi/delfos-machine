@@ -30,7 +30,7 @@ public class Consulta {
     @NotNull
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_cliente", nullable = false)
-    private Clinica clinica;
+    private Dentista dentista;
 
     @Size(max = 100)
     @Column(name = "email_usuario", length = 100, unique = true, nullable = false)

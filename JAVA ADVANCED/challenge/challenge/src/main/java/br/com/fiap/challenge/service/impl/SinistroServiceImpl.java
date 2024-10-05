@@ -1,8 +1,8 @@
-package br.com.fiap.challenge.gateways.service.impl;
+package br.com.fiap.challenge.service.impl;
 
 import br.com.fiap.challenge.domains.Sinistro;
 import br.com.fiap.challenge.gateways.repository.SinistroRepository;
-import br.com.fiap.challenge.gateways.service.SinistroService;
+import br.com.fiap.challenge.service.SinistroService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

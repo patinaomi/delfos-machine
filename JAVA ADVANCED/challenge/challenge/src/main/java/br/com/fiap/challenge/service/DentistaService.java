@@ -1,4 +1,4 @@
-package br.com.fiap.challenge.gateways.service;
+package br.com.fiap.challenge.service;
 
 import br.com.fiap.challenge.domains.Dentista;
 

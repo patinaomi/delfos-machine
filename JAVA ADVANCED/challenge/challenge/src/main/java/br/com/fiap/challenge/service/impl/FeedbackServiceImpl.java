@@ -1,8 +1,8 @@
-package br.com.fiap.challenge.gateways.service.impl;
+package br.com.fiap.challenge.service.impl;
 
 import br.com.fiap.challenge.domains.Feedback;
 import br.com.fiap.challenge.gateways.repository.FeedbackRepository;
-import br.com.fiap.challenge.gateways.service.FeedbackService;
+import br.com.fiap.challenge.service.FeedbackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

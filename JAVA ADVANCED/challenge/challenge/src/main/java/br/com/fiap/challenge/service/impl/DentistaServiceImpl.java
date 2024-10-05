@@ -1,8 +1,8 @@
-package br.com.fiap.challenge.gateways.service.impl;
+package br.com.fiap.challenge.service.impl;
 
 import br.com.fiap.challenge.domains.Dentista;
 import br.com.fiap.challenge.gateways.repository.DentistaRepository;
-import br.com.fiap.challenge.gateways.service.DentistaService;
+import br.com.fiap.challenge.service.DentistaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

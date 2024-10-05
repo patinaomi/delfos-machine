@@ -1,8 +1,8 @@
-package br.com.fiap.challenge.gateways.service.impl;
+package br.com.fiap.challenge.service.impl;
 
 import br.com.fiap.challenge.domains.FormularioDetalhado;
 import br.com.fiap.challenge.gateways.repository.FormularioDetalhadoRepository;
-import br.com.fiap.challenge.gateways.service.FormularioDetalhadoService;
+import br.com.fiap.challenge.service.FormularioDetalhadoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

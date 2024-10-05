@@ -1,8 +1,8 @@
-package br.com.fiap.challenge.gateways.service.impl;
+package br.com.fiap.challenge.service.impl;
 
 import br.com.fiap.challenge.domains.Consulta;
 import br.com.fiap.challenge.gateways.repository.ConsultaRepository;
-import br.com.fiap.challenge.gateways.service.ConsultaService;
+import br.com.fiap.challenge.service.ConsultaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

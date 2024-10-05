@@ -33,7 +33,7 @@ public class Agenda {
     @Column(name = "data_consulta", nullable = false)
     private Timestamp dataConsulta;
 
-    @Column(name = "status_consulta")
+    @Column(name = "status_consulta", length = 1)
     private char statusConsulta;
 
     @Column(name = "observacoes", length = 250)

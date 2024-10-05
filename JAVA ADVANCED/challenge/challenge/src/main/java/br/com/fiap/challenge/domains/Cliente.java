@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -18,4 +20,24 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cliente", nullable = false)
     private Long idCliente;
+
+    @Column(name = "nome", length = 100, nullable = false)
+    private String nome;
+
+    @Column(name = "sobrenome", length = 100, nullable = false)
+    private String sobrenome;
+
+    @Column(name = "email", length = 100, nullable = false)
+    private String email;
+
+    @Column(name = "telefone", length = 15, nullable = false)
+    private String telefone;
+
+    @Column(name = "data_nasc", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataNasc;
+
+    @Column(name = "endereco", length = 255, nullable = false)
+    private String endereco;
+
 }

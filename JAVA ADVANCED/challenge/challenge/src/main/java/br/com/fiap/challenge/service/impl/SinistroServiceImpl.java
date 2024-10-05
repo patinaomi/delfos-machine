@@ -15,23 +15,23 @@ public class SinistroServiceImpl implements SinistroService {
     private final SinistroRepository sinistroRepository;
 
     @Override
-    public Sinistro criarSinistro(Sinistro sinistro) {
+    public Sinistro criar(Sinistro sinistro) {
         return sinistroRepository.save(sinistro);
     }
 
     @Override
-    public Sinistro buscarSinistroPorId(Long id) {
+    public Sinistro buscarPorId(Long id) {
         return sinistroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Sinistro não encontrado"));
     }
 
     @Override
-    public List<Sinistro> buscarTodosSinistros() {
+    public List<Sinistro> buscarTodos() {
         return sinistroRepository.findAll();
     }
 
     @Override
-    public Sinistro atualizarSinistro(Long id, Sinistro sinistro) {
+    public Sinistro atualizar(Long id, Sinistro sinistro) {
         if (sinistroRepository.existsById(id)) {
             sinistro.setIdSinistro(id);
             return sinistroRepository.save(sinistro);
@@ -41,7 +41,7 @@ public class SinistroServiceImpl implements SinistroService {
     }
 
     @Override
-    public void deletarSinistro(Long id) {
+    public void deletar(Long id) {
         if (sinistroRepository.existsById(id)) {
             sinistroRepository.deleteById(id);
         } else {

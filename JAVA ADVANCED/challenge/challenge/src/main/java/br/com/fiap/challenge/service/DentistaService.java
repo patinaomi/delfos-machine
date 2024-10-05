@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface DentistaService {
 
-    Dentista criarDentista(Dentista dentista);
-    Dentista buscarDentistaPorId(Long id);
-    List<Dentista> buscarTodosDentistas();
-    Dentista atualizarDentista(Long id, Dentista dentista);
-    void deletarDentista(Long id);
+    Dentista criar(Dentista dentista);
+    Dentista buscarPorId(Long id);
+    List<Dentista> buscarTodos();
+    Dentista atualizar(Long id, Dentista dentista);
+    void deletar(Long id);
 }

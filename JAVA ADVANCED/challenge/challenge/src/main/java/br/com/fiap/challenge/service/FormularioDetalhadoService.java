@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface FormularioDetalhadoService {
 
-    FormularioDetalhado criarFormularioDetalhado(FormularioDetalhado formulario);
-    FormularioDetalhado buscarFormularioDetalhadoPorId(Long id);
-    List<FormularioDetalhado> buscarTodosFormulariosDetalhados();
-    FormularioDetalhado atualizarFormularioDetalhado(Long id, FormularioDetalhado formulario);
-    void deletarFormularioDetalhado(Long id);
+    FormularioDetalhado criar(FormularioDetalhado formulario);
+    FormularioDetalhado buscarPorId(Long id);
+    List<FormularioDetalhado> buscarTodos();
+    FormularioDetalhado atualizar(Long id, FormularioDetalhado formulario);
+    void deletar(Long id);
 
 }

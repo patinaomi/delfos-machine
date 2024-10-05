@@ -1,13 +1,14 @@
 package br.com.fiap.challenge.service;
 
 import br.com.fiap.challenge.domains.Cliente;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
 public interface ClienteService {
-    Cliente criarCliente(Cliente cliente);
-    Cliente buscarClientePorId(Long id);
-    List<Cliente> buscarTodosClientes();
-    Cliente atualizarCliente(Long id, Cliente cliente);
-    void deletarCliente(Long id);
+    Cliente criar(@Valid ClienteRequest cliente);
+    Cliente buscarPorId(Long id);
+    List<Cliente> buscarTodos();
+    Cliente atualizar(Long id, Cliente cliente);
+    void deletar(Long id);
 }

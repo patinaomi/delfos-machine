@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface SinistroService {
 
-    Sinistro criarSinistro(Sinistro sinistro);
-    Sinistro buscarSinistroPorId(Long id);
-    List<Sinistro> buscarTodosSinistros();
-    Sinistro atualizarSinistro(Long id, Sinistro sinistro);
-    void deletarSinistro(Long id);
+    Sinistro criar(Sinistro sinistro);
+    Sinistro buscarPorId(Long id);
+    List<Sinistro> buscarTodos();
+    Sinistro atualizar(Long id, Sinistro sinistro);
+    void deletar(Long id);
 
 }

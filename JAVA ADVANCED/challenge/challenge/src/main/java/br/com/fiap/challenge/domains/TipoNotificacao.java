@@ -11,11 +11,14 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Entity
-@Table(name = "cliente")
-public class Cliente {
+@Table(name = "tipo_notificacao")
+public class TipoNotificacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cliente", nullable = false)
-    private Long idCliente;
+    @Column(name = "id_tipo_notificacao", nullable = false)
+    private Long idTipoNotificacao;
+
+    @Column(name = "descricao", length = 40, nullable = false)
+    private String descricao;
 }

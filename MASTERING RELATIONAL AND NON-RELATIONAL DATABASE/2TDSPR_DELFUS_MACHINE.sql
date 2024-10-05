@@ -65,12 +65,9 @@ CREATE TABLE Consulta (
     id_consulta INTEGER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     id_cliente INTEGER NOT NULL, 
     id_clinica INTEGER NOT NULL, 
-    id_dentista INTEGER NOT NULL, 
-    id_forma_pagamento INTEGER NOT NULL, 
-    id_tipo_consulta INTEGER NOT NULL,
+    id_dentista INTEGER NOT NULL,
     tipo_servico VARCHAR2(100) NOT NULL,
-    data_consulta DATE NOT NULL, 
-    hora_consulta TIMESTAMP NOT NULL, 
+    data_consulta TIMESTAMP NOT NULL, 
     status_consulta CHAR(1), -- 'S' ou 'N'
     observacoes VARCHAR2(250), 
     sintomas VARCHAR2(250), 
@@ -158,8 +155,6 @@ CREATE TABLE Agenda (
     id_agenda INTEGER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     id_cliente INTEGER NOT NULL,
     id_consulta INTEGER NOT NULL,
-    data_consulta DATE NOT NULL,
-    hora_consulta TIMESTAMP NOT NULL,
     status_consulta CHAR(1),
     observacoes VARCHAR2(250),
 

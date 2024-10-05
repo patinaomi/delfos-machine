@@ -14,10 +14,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/clientes", produces = "application/json")
@@ -38,28 +37,94 @@ public class ClienteController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor", content = @Content)
     })
     @PostMapping("/criar")
-    public ResponseEntity<ClienteResponse> criar(@Valid @RequestBody ClienteRequest clienteRequest) {
-        System.out.println(clienteRequest); // Adicione logs para depuração
-        Cliente cliente = Cliente.builder()
-                .nome(clienteRequest.getNome())
-                .sobrenome(clienteRequest.getSobrenome())
-                .email(clienteRequest.getEmail())
-                .telefone(clienteRequest.getTelefone())
-                .dataNasc(clienteRequest.getDataNasc())
-                .endereco(clienteRequest.getEndereco())
-                .build();
+    public ResponseEntity<?> criar(@Valid @RequestBody ClienteRequest clienteRequest) {
+        try {
+            Cliente cliente = Cliente.builder()
+                    .nome(clienteRequest.getNome())
+                    .sobrenome(clienteRequest.getSobrenome())
+                    .email(clienteRequest.getEmail())
+                    .telefone(clienteRequest.getTelefone())
+                    .dataNasc(clienteRequest.getDataNasc())
+                    .endereco(clienteRequest.getEndereco())
+                    .build();
 
-        Cliente clienteSalvo = clienteService.criar(cliente);
+            Cliente clienteSalvo = clienteService.criar(cliente);
 
-        ClienteResponse clienteResponse = ClienteResponse.builder()
-                .nome(clienteSalvo.getNome())
-                .sobrenome(clienteSalvo.getSobrenome())
-                .email(clienteSalvo.getEmail())
-                .telefone(clienteSalvo.getTelefone())
-                .dataNasc(clienteSalvo.getDataNasc())
-                .endereco(clienteSalvo.getEndereco())
-                .build();
+            ClienteResponse clienteResponse = ClienteResponse.builder()
+                    .nome(clienteSalvo.getNome())
+                    .sobrenome(clienteSalvo.getSobrenome())
+                    .email(clienteSalvo.getEmail())
+                    .telefone(clienteSalvo.getTelefone())
+                    .dataNasc(clienteSalvo.getDataNasc())
+                    .endereco(clienteSalvo.getEndereco())
+                    .build();
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(clienteResponse);
+            return ResponseEntity.status(HttpStatus.CREATED).body(clienteResponse);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar o cliente: " + e.getMessage());
+        }
     }
+
+    @Operation(summary = "Buscar todos os clientes", description = "Retorna uma lista de todos os clientes")
+    @GetMapping
+    public ResponseEntity<?> buscarTodos() {
+        try {
+            List<Cliente> clientes = clienteService.buscarTodos();
+            if (clientes.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum cliente encontrado.");
+            }
+            return ResponseEntity.ok(clientes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao buscar clientes: " + e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Buscar cliente por ID", description = "Retorna um cliente com base no ID fornecido")
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+        try {
+            Cliente cliente = clienteService.buscarPorId(id);
+            return ResponseEntity.ok(cliente);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID " + id + " não encontrado.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao buscar cliente: " + e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Atualizar cliente", description = "Atualiza os dados de um cliente com base no ID fornecido")
+    @PutMapping("/{id}")
+    public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody ClienteRequest clienteRequest) {
+        try {
+            Cliente cliente = Cliente.builder()
+                    .nome(clienteRequest.getNome())
+                    .sobrenome(clienteRequest.getSobrenome())
+                    .email(clienteRequest.getEmail())
+                    .telefone(clienteRequest.getTelefone())
+                    .dataNasc(clienteRequest.getDataNasc())
+                    .endereco(clienteRequest.getEndereco())
+                    .build();
+
+            Cliente clienteAtualizado = clienteService.atualizar(id, cliente);
+            return ResponseEntity.ok(clienteAtualizado);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID " + id + " não encontrado.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar cliente: " + e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Deletar cliente", description = "Deleta um cliente com base no ID fornecido")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletar(@PathVariable Long id) {
+        try {
+            clienteService.deletar(id);
+            return ResponseEntity.ok("Cliente com ID " + id + " foi deletado com sucesso.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID " + id + " não encontrado.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao deletar cliente: " + e.getMessage());
+        }
+    }
+
 }

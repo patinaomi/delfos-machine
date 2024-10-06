@@ -48,9 +48,11 @@ src/
 ### Pré-requisitos
 
 - .NET SDK
-- MongoDB
-Link de acesso ao banco: 
-    $   mongodb+srv://csspclaudio:clnzEcsY8xmMVXMr@cluster0.kfgkjua.mongodb.net/
+- MongoDB: link de acesso ao banco: 
+
+```bash
+    mongodb+srv://csspclaudio:clnzEcsY8xmMVXMr@cluster0.kfgkjua.mongodb.net/
+``` 
 
 Demais configurações se for necessária:
 
@@ -83,13 +85,17 @@ Demais configurações se for necessária:
 ## Execução
 
 1. Restaure as dependências:
-    $   dotnet restore
-
+```bash
+    dotnet restore
+```
 2. Compile e execute a aplicação:
-    $   dotnet run
-
+```bash
+    dotnet run
+```
 3. Acesse o Swagger UI para testar a API:
-    $   http://localhost:3001/swagger
+```bash
+http://localhost:3001/swagger
+```
 
 ## Escopo
 

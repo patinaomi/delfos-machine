@@ -105,7 +105,7 @@ Com as dependências instaladas, rode a aplicação com:
 ## Documentação da API
 Foi realizada a documentação da API utilizando **Swagger**, o que facilita a visualização e teste de todos os endpoints disponíveis no sistema. Para acessar a documentação completa, basta visitar o link [Swagger](http://localhost:8080/swagger-ui/index.html#/) quando o projeto estiver em execução.
 
-Além disso, o projeto conta com um arquivo de exportação do Postman contendo todas as requisições para teste dos endpoints da API. Esse arquivo pode ser importado diretamente no Postman, facilitando a realização de testes e a validação das funcionalidades disponíveis. Basta acessar o arquivo [por este link](http://localhost:8080/swagger-ui/index.html#/) e importar no Postman para ter acesso a todas as operações configuradas.
+Além disso, o projeto conta com um arquivo de exportação do Postman contendo todas as requisições para teste dos endpoints da API. Esse arquivo pode ser importado diretamente no Postman, facilitando a realização de testes e a validação das funcionalidades disponíveis. Basta acessar o arquivo [por este link]([http://localhost:8080/swagger-ui/index.html#/](https://github.com/patinaomi/delfos-machine/blob/main/JAVA%20ADVANCED/Challenge%20Odontoprev.postman_collection.json)) e importar no Postman para ter acesso a todas as operações configuradas.
 
 #### Cliente
 

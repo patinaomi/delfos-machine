@@ -102,6 +102,8 @@ Com as dependências instaladas, rode a aplicação com:
 ## Diagrama de Classes
 ![Diagrama de Classes](https://github.com/patinaomi/delfos-machine/blob/main/JAVA%20ADVANCED/diagrama-de-classes.png)
 
+![Domains](https://github.com/patinaomi/delfos-machine/blob/main/JAVA%20ADVANCED/domains.png)
+
 ## Documentação da API
 Foi realizada a documentação da API utilizando **Swagger**, o que facilita a visualização e teste de todos os endpoints disponíveis no sistema. Para acessar a documentação completa, basta visitar o link [Swagger](http://localhost:8080/swagger-ui/index.html#/) quando o projeto estiver em execução.
 

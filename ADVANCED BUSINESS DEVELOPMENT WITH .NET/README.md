@@ -18,6 +18,10 @@ Desenvolver uma aplicação móvel, gerenciada em Java, e uma aplicação web, g
 
 # Link com vídeo do prótotipo da nossa aplicação
 
+```bash
+    https://youtu.be/4rk6KTjp8mM?si=o-7w2aOF_NlqJ5b-
+``` 
+
 1. Será interessante para você entender melhor nossa aplicação, iniciando pelo Mobile.
 2. Logo iremos criar o prótotipo da nossa aplicação na web. Será enviada na segunda sprint.
 
@@ -80,7 +84,9 @@ Demais configurações se for necessária:
 ### Configuração
 
 1. Clone o repositório:
-   $    git clone colocar_o_link_aqui_do_repositorio_final
+```bash
+    https://github.com/patinaomi/delfos-machine.git
+``` 
    
 ## Execução
 
@@ -503,3 +509,77 @@ Objetivo: Listar todos os tipos de notificação disponíveis no sistema.
 
 1. Cada tipo de notificação deve ter um idTipoNotificacao único.
 2. A descrição deve ser clara e representativa do tipo de notificação.
+
+# Classe Autenticação
+
+**Responsabilidades da Classe Autenticação:
+
+A classe Autenticação gerencia o processo de login e logout dos usuários, garantindo que apenas usuários autorizados tenham acesso ao sistema. Ela valida credenciais e gera tokens de sessão para acesso seguro.
+
+**Atributos:**
+
+usuario: Nome de usuário ou e-mail do usuário.
+senha: Senha do usuário, que será validada durante o login.
+token: Token gerado após a autenticação bem-sucedida.
+
+**Métodos:**
+
+***Login***
+
+Objetivo: Validar as credenciais do usuário e permitir o acesso ao sistema, gerando um token de sessão.
+
+***Logout***
+
+Objetivo: Encerrar a sessão do usuário, invalidando o token de autenticação.
+
+***ValidarToken***
+
+Objetivo: Verificar se um token de autenticação fornecido é válido e se o usuário está autorizado a acessar recursos.
+
+***RecuperarSenha***
+
+Objetivo: Iniciar o processo de recuperação de senha para um usuário, enviando instruções para redefinição.
+
+***AtualizarSenha***
+
+Objetivo: Permitir que um usuário mude sua senha após passar pela validação adequada.
+
+**Regras de Negócio:**
+
+1. As senhas devem ser armazenadas de forma segura (ex: hash).
+2. O token gerado deve ter um tempo de expiração para garantir a segurança.
+3. O sistema deve permitir tentativas limitadas de login para prevenir ataques de força bruta.
+
+# Classe Logs de Login
+
+**Responsabilidades da Classe Logs de Login:**
+
+A classe Logs de Login é responsável por registrar e armazenar informações sobre as tentativas de login dos usuários. Isso inclui tanto logins bem-sucedidos quanto falhos, permitindo auditoria e monitoramento de segurança.
+
+**Atributos:**
+
+id: Identificador único do log de login.
+usuario: Nome de usuário ou e-mail do usuário que tentou fazer login.
+dataHora: Data e hora da tentativa de login.
+resultado: Resultado da tentativa (ex: "sucesso" ou "falha").
+ip: Endereço IP do cliente que tentou fazer login.
+
+**Métodos:**
+
+***RegistrarLogin***
+
+Objetivo: Armazenar informações sobre uma tentativa de login, incluindo o usuário, data e hora, resultado e IP.
+
+***BuscarLogsPorUsuario***
+
+Objetivo: Recuperar todos os logs de login associados a um usuário específico para auditoria.
+
+***BuscarLogsPorData***
+
+Objetivo: Recuperar logs de login dentro de um intervalo de datas específico para análise.
+
+**Regras de Negócio:**
+
+1. Os logs devem ser armazenados em um formato seguro e acessível apenas a usuários autorizados.
+2. Deve haver uma política de retenção para determinar por quanto tempo os logs serão mantidos.
+3. Os registros de login falhos devem ser monitorados para identificar possíveis tentativas de ataque.

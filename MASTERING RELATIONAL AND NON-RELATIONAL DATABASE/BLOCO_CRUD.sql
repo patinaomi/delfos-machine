@@ -23,15 +23,15 @@ END;
 2. DELETE
 
 DECLARE
-    v_id_endereco NUMBER := 1;
+    v_id_consulta NUMBER := 1;
 BEGIN
-    DELETE FROM ENDERECO
-    WHERE ID_Endereco = v_id_endereco;
+    DELETE FROM CONSULTA
+    WHERE ID_Consulta = v_id_consulta;
 
     IF SQL%ROWCOUNT > 0 THEN
-        DBMS_OUTPUT.PUT_LINE('Endereço excluído com sucesso, ID ' || v_id_endereco);
+        DBMS_OUTPUT.PUT_LINE('Consulta excluída com sucesso, ID ' || v_id_consulta);
     ELSE
-        DBMS_OUTPUT.PUT_LINE('Nenhum endereço encontrado com o ID ' || v_id_endereco);
+        DBMS_OUTPUT.PUT_LINE('Nenhuma consulta encontrada com o ID ' || v_id_consulta);
     END IF;
 
     COMMIT;

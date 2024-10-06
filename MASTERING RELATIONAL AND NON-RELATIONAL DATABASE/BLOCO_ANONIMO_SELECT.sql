@@ -1,14 +1,14 @@
 1. Consulta com INNER JOIN
 DECLARE
     CURSOR c IS
-        SELECT c.Nome, COUNT(e.ID_Endereco) AS Total_Enderecos
+        SELECT c.Nome, COUNT(e.ID_Consulta) AS Total_Consultas
         FROM CLIENTE c
-        INNER JOIN ENDERECO e ON c.ID_Cliente = e.ID_Cliente
+        INNER JOIN CONSULTA e ON c.ID_Cliente = e.ID_Cliente
         GROUP BY c.Nome
-        ORDER BY Total_Enderecos DESC;
+        ORDER BY Total_Consultas DESC;
 BEGIN
     FOR x IN c LOOP
-        DBMS_OUTPUT.PUT_LINE('Cliente: ' || x.Nome || ', Total de Endereços: ' || x.Total_Enderecos);
+        DBMS_OUTPUT.PUT_LINE('Cliente: ' || x.Nome || ', Total de Consultas: ' || x.Total_Consultas);
     END LOOP;
 END;
 
@@ -16,14 +16,14 @@ END;
 2. Consulta com LEFT JOIN
 DECLARE
     CURSOR c IS
-        SELECT c.Nome, COUNT(e.ID_Endereco) AS Total_Enderecos
+        SELECT c.Nome, COUNT(e.ID_Consulta) AS Total_Consulta
         FROM CLIENTE c
-        LEFT JOIN ENDERECO e ON c.ID_Cliente = e.ID_Cliente
+        LEFT JOIN CONSULTA e ON c.ID_Cliente = e.ID_Cliente
         GROUP BY c.Nome
-        ORDER BY Total_Enderecos ASC;
+        ORDER BY Total_Consultas ASC;
 BEGIN
     FOR x IN c LOOP
-        DBMS_OUTPUT.PUT_LINE('Cliente: ' || x.Nome || ', Total de Endereços: ' || NVL(x.Total_Enderecos, 0));
+        DBMS_OUTPUT.PUT_LINE('Cliente: ' || x.Nome || ', Total de Consultas: ' || NVL(x.Total_Consultas, 0));
     END LOOP;
 END;
 
@@ -31,13 +31,13 @@ END;
 DECLARE
     CURSOR c IS
         SELECT e.Cidade, COUNT(c.ID_Cliente) AS Total_Clientes
-        FROM ENDERECO e
+        FROM CONSULTAS e
         RIGHT JOIN CLIENTE c ON c.ID_Cliente = e.ID_Cliente
-        GROUP BY e.Cidade
+        GROUP BY e.Status_Consulta
         ORDER BY Total_Clientes DESC;
 BEGIN
     FOR x IN c LOOP
-        DBMS_OUTPUT.PUT_LINE('Cidade: ' || NVL(x.Cidade, 'Sem Cidade') || ', Total de Clientes: ' || x.Total_Clientes);
+        DBMS_OUTPUT.PUT_LINE('Status: ' || NVL(x.Status, 'Sem Status') || ', Total de Clientes: ' || x.Total_Clientes);
     END LOOP;
 END;
 

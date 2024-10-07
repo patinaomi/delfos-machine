@@ -3,10 +3,14 @@
 ## Dados dos alunos
 
 1. Claudio Silva Bispo
-1.1 RM 553472
+```bash
+    RM 553472
+```
 
 2. Patricia Naomi Yamagishi
-2.1 RM 552981
+```bash
+    RM 552981
+```
 
 ## Visão Geral
 

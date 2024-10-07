@@ -155,12 +155,18 @@ Representa o cadastro de um usuário, coletando informações básicas através 
 
 **Atributos:**
 
-idCadastro: Identificador único do cadastro.
+idCliente: Identificador único do cadastro em relação ao cliente.
 nome: Nome completo do cliente.
-cpf: CPF do cliente.
+Sobrenome: Último sobrenome do cliente.
 email: Endereço de email do cliente.
 telefone: Número de telefone do cliente.
+DataNasc: Data de nascimento do cliente.
 endereco: Endereço residencial do cliente.
+Senha: Senha de acesso ao site.
+
+Próximos passos:
+
+Criar idCadastro
 dataCadastro: Data em que o cadastro foi realizado.
 
 **Método:**
@@ -188,15 +194,15 @@ Essa classe não será responsável por criar clientes, pois o processo de cria�
 
 A classe Cliente terá os seguintes atributos para armazenar as informações do cliente:
 
+Id: Id de identificação que o banco va gerar automaticamente
 idCliente: Identificador único do cliente.
-nome: Nome completo do cliente.
+nome: Nome do cliente.
+Sobrenome: Último nome do cliente.
 email: Endereço de e-mail do cliente.
 telefone: Número de telefone de contato.
 endereco: Endereço completo do cliente.
 dataNascimento: Data de nascimento do cliente.
-historicoConsultas: Lista de consultas passadas e agendadas.
-preferencias: Preferências de horários e clínicas.
-status: Status ativo/inativo do cliente (para marcar se o cliente foi "apagado").
+Senha: Senha de acesso a aplicação.
 
 **Métodos:**
 
@@ -228,11 +234,11 @@ A classe Agenda gerencia o agendamento de consultas e compromissos do cliente co
 
 **Atributos:**
 
+id: Id gerado pela gestão do banco.
 idAgenda: Identificador único do agendamento.
 idCliente: Identificador do cliente associado ao agendamento.
-idDentista: Identificador do dentista que atenderá o cliente.
+idConsulta: Identificador com dados da consulta que atenderá o cliente.
 dataConsulta: Data e hora do agendamento.
-clinica: Clínica onde será realizada a consulta.
 status: Status do agendamento (ativo, cancelado, concluído).
 observacoes: Observações adicionais sobre o agendamento.
 
@@ -318,11 +324,21 @@ A classe Consulta gerencia as informações relacionadas às consultas odontoló
 
 idConsulta: Identificador único da consulta.
 dataHora: Data e hora agendadas para a consulta.
-dentistaId: Identificador do dentista responsável pela consulta.
 clienteId: Identificador do cliente que agendou a consulta.
 clinicaId: Identificador da clínica onde a consulta será realizada.
 status: Status da consulta (agendada, cancelada, concluída).
-observacoes: Notas ou observações adicionais sobre a consulta.
+IdFormaPagamento
+IdTipoConsulta
+tipo_servico
+observacoes
+sintomas
+tratamento_recomendado
+custo
+data_retorno
+
+Próximos passos: Valiar se tem necessidade desse dado
+
+dentistaId: Identificador do dentista responsável pela consulta.
 
 **Métodos:**
 
@@ -362,12 +378,17 @@ A classe Dentista representa os profissionais odontológicos cadastrados no sist
 **Atributos:**
 
 idDentista: Identificador único do dentista.
-nome: Nome completo do dentista.
+nome: Nome do dentista.
+Sobrenome: Último sobrenome do dentista
 especialidade: Especialidade do dentista (ex: ortodontia, endodontia).
 telefone: Número de contato do dentista.
 email: Endereço de e-mail do dentista.
-crm: Registro no Conselho Regional de Odontologia (CRM).
 clinicaId: Identificador da clínica onde o dentista trabalha.
+Avaliação: Nota atribuida ao dentista. Será ligado com o formulário de feedback.
+
+Próximos passos:
+Analisar se precisamos do e-mail do dentista.
+crm: Registro no Conselho Regional de Odontologia (CRM).
 
 **Métodos:**
 
@@ -441,7 +462,9 @@ A classe Feedback é responsável por armazenar e gerenciar as opiniões e suges
 
 idFeedback: Identificador único do feedback.
 idCliente: Identificador do cliente que fornece o feedback.
-mensagem: Conteúdo do feedback fornecido pelo cliente.
+idDentista: Identificador do dentista que recebeu o feedback.
+idClinica: Identificador da clinica que recebeu o feedback.
+Comentário: Conteúdo do feedback fornecido pelo cliente.
 avaliacao: Avaliação dada pelo cliente (por exemplo, em uma escala de 1 a 5).
 data: Data em que o feedback foi enviado.
 
@@ -481,7 +504,9 @@ A classe Tipo de Notificação define os diferentes tipos de notificações que 
 **Atributos:**
 
 idTipoNotificacao: Identificador único do tipo de notificação.
-descricao: Descrição do tipo de notificação (por exemplo, "Lembrete de Consulta", "Promoção", etc.).
+idCliente: Identificador único do cliente quem recebeu a notificação.
+Mensagem: Descrição do tipo de notificação (por exemplo, "Lembrete de Consulta", "Promoção", etc.).
+Data do envio.
 
 **Métodos:**
 
@@ -550,7 +575,7 @@ Objetivo: Permitir que um usuário mude sua senha após passar pela validação 
 2. O token gerado deve ter um tempo de expiração para garantir a segurança.
 3. O sistema deve permitir tentativas limitadas de login para prevenir ataques de força bruta.
 
-# Classe Logs de Login
+# Classe Logs de Login - Será chamada de Login
 
 **Responsabilidades da Classe Logs de Login:**
 
@@ -559,10 +584,8 @@ A classe Logs de Login é responsável por registrar e armazenar informações s
 **Atributos:**
 
 id: Identificador único do log de login.
-usuario: Nome de usuário ou e-mail do usuário que tentou fazer login.
+usuario: Nome de usuário ou e-mail do usuário que tentou fazer login ou serviço utilizado como google, direto do cadastro, linkedin ou outros.
 dataHora: Data e hora da tentativa de login.
-resultado: Resultado da tentativa (ex: "sucesso" ou "falha").
-ip: Endereço IP do cliente que tentou fazer login.
 
 **Métodos:**
 

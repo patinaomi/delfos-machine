@@ -1,6 +1,7 @@
 package br.com.projeto
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loginEditText : EditText
     private lateinit var senhaEditText : EditText
     private lateinit var erroLoginTextView : TextView
+    private lateinit var comprarButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         senhaEditText = findViewById(R.id.et_senha)
         acessarButton = findViewById(R.id.bt_acessar)
         erroLoginTextView = findViewById(R.id.tv_erro_login)
+        comprarButton = findViewById(R.id.bt_comprar)
 
         voltarImage.setOnClickListener {
             val intent = Intent(this, InicioActivity::class.java)
@@ -52,6 +55,13 @@ class MainActivity : AppCompatActivity() {
 
         acessarButton.setOnClickListener {
             validarLogin(loginEditText.text.toString(), senhaEditText.text.toString(), erroLoginTextView)
+        }
+
+        comprarButton.setOnClickListener {
+            val url = "https://www.odontoprev.com.br"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
         }
     }
 

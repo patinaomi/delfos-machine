@@ -62,11 +62,25 @@
         android:id="@+id/check_lembrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="12dp"
+        android:buttonTint="@android:color/white"
         android:text="Lembre-se de mim"
         android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_senha" />
+
+    <TextView
+        android:id="@+id/tv_esqueci_senha"
+        android:layout_width="201dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:text="Esqueci minha senha"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/check_lembrar"
         app:layout_constraintTop_toBottomOf="@+id/et_senha" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

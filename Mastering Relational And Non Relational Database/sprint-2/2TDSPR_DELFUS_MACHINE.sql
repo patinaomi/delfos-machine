@@ -24,6 +24,18 @@ DROP TABLE T_Cadastro_Cliente CASCADE CONSTRAINTS;
 DROP TABLE T_Endereco_Cadastro CASCADE CONSTRAINTS;
 DROP TABLE T_Estado CASCADE CONSTRAINTS;
 DROP TABLE T_Genero CASCADE CONSTRAINTS;
+DROP TABLE T_Recompensa CASCADE CONSTRAINTS;
+DROP TABLE T_Clinica_Sugerida CASCADE CONSTRAINTS;
+DROP TABLE T_Agendamento CASCADE CONSTRAINTS;
+DROP TABLE T_Status CASCADE CONSTRAINTS;
+DROP TABLE T_Notificacao CASCADE CONSTRAINTS;
+DROP TABLE T_Preferencia_Notificacao CASCADE CONSTRAINTS;
+DROP TABLE T_Consulta CASCADE CONSTRAINTS;
+DROP TABLE T_Parceria CASCADE CONSTRAINTS;
+DROP TABLE T_Avaliacao CASCADE CONSTRAINTS;
+DROP TABLE T_Pesquisa_Satisfacao CASCADE CONSTRAINTS;
+DROP TABLE T_Tarefa CASCADE CONSTRAINTS;
+DROP TABLE T_Programa_Beneficio CASCADE CONSTRAINTS;
 
 -- Criação das tabelas
 
@@ -66,10 +78,18 @@ CREATE TABLE T_Tipo_Atendimento (
 -- 7. Tabela de Perfil
 CREATE TABLE T_Perfil (
     id_perfil INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
-    desc_perfil VARCHAR2(50) NOT NULL -- cliente, médico, clínica
+    desc_perfil VARCHAR2(50) NOT NULL -- cliente, administrador, clínico, secretaria, auxiliar, medico
 );
 
--- 8. Tabela de Cadastro de Endereço
+-- 8. Tabela de Sistema de Recompensas
+CREATE TABLE T_Recompensa (
+    id_recompensa INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    pontos_acumulados INTEGER NOT NULL,
+    descricao_recompensa VARCHAR2(255) NOT NULL,
+    data_atualizacao TIMESTAMP NOT NULL
+);
+
+-- 9. Tabela de Cadastro de Endereço
 CREATE TABLE T_Endereco_Cadastro (
     id_end INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     cep_end VARCHAR2(15) NOT NULL,
@@ -82,7 +102,7 @@ CREATE TABLE T_Endereco_Cadastro (
     CONSTRAINT fk_estado_cliente FOREIGN KEY (id_estado_fk) REFERENCES T_Estado(id_est)
 );
 
--- 9. Tabela de Cadastro do Cliente
+-- 10. Tabela de Cadastro do Cliente
 CREATE TABLE T_Cadastro_Cliente (
     id_cad_clie INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     nome_cad_clie VARCHAR2(100) NOT NULL,
@@ -98,7 +118,7 @@ CREATE TABLE T_Cadastro_Cliente (
     CONSTRAINT fk_endereco_cadastro FOREIGN KEY (id_end_cadastro_fk) REFERENCES T_Endereco_Cadastro(id_end)
 );
 
--- 10. Tabela de Endereço Preferência
+-- 11. Tabela de Endereço Preferência
 CREATE TABLE T_Endereco_Preferencia (
     id_end_pref INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     data_cadastro_end_pref TIMESTAMP NOT NULL,
@@ -115,13 +135,13 @@ CREATE TABLE T_Endereco_Preferencia (
     CONSTRAINT fk_estado_preferencia FOREIGN KEY (id_estado_fk) REFERENCES T_Estado(id_est)
 );
 
--- 11. Tabela de Especialidade
+-- 12. Tabela de Especialidade
 CREATE TABLE T_Especialidade (
     id_esp INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     desc_esp VARCHAR2(100) NOT NULL
 );
 
--- 12. Tabela de Cadastro da Clínica
+-- 13. Tabela de Cadastro da Clínica
 CREATE TABLE T_Cadastro_Clinica (
     id_cad_cli INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     nome_cad_cli VARCHAR2(100) NOT NULL,
@@ -132,7 +152,7 @@ CREATE TABLE T_Cadastro_Clinica (
     CONSTRAINT fk_endereco_clinica FOREIGN KEY (id_endereco_cadastro_fk) REFERENCES T_Endereco_Cadastro(id_end)
 );
 
--- 13. Tabela de Cadastro do Médico
+-- 14. Tabela de Cadastro do Médico
 CREATE TABLE T_Cadastro_Medico (
     id_cad_med INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     nome_cad_med VARCHAR2(100) NOT NULL,
@@ -147,7 +167,7 @@ CREATE TABLE T_Cadastro_Medico (
     CONSTRAINT fk_end_cadastrado_medico FOREIGN KEY (id_end_cadastrado_fk) REFERENCES T_Endereco_Cadastro(id_end)
 );
 
--- 14. Tabela de Preferência de Atendimento
+-- 15. Tabela de Preferência de Atendimento
 CREATE TABLE T_Preferencia_Atendimento (
     id_preferencia_atendimento INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     id_cliente_fk INTEGER NOT NULL,
@@ -160,7 +180,7 @@ CREATE TABLE T_Preferencia_Atendimento (
     CONSTRAINT fk_dia_preferencia_atendimento FOREIGN KEY (id_dia_semana_fk) REFERENCES T_Dia_Semana(id_dia_semana)
 );
 
--- 15. Tabela de Usuário Perfil
+-- 16. Tabela de Usuário Perfil
 CREATE TABLE T_Usuario_Perfil (
     id_usuario_perfil INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     disp_horario_fk INTEGER,
@@ -171,7 +191,7 @@ CREATE TABLE T_Usuario_Perfil (
     CONSTRAINT fk_dia_semana_disponibilidade FOREIGN KEY (disp_dia_semana_fk) REFERENCES T_Dia_Semana(id_dia_semana)
 );
 
--- 16. Tabela de Usuário
+-- 17. Tabela de Usuário
 CREATE TABLE T_Usuario (
     id_user INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     login_user VARCHAR2(100) NOT NULL,
@@ -182,7 +202,7 @@ CREATE TABLE T_Usuario (
     CONSTRAINT fk_usuario_perfil FOREIGN KEY (id_usuario_perfil_fk) REFERENCES T_Usuario_Perfil(id_usuario_perfil)
 );
 
--- 17. Tabela de Cliente
+-- 18. Tabela de Cliente
 CREATE TABLE T_Cliente (
     id_clie INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     nome_clie VARCHAR2(100) NOT NULL, 
@@ -195,14 +215,16 @@ CREATE TABLE T_Cliente (
     id_end_fk INTEGER NOT NULL, 
     id_end_pref_fk INTEGER NOT NULL, 
     id_cad_clie_fk INTEGER NOT NULL,
+    id_recompensa_fk INTEGER NOT NULL,
     id_preferencia_atendimento_fk INTEGER NOT NULL,
     CONSTRAINT fk_endereco FOREIGN KEY (id_end_fk) REFERENCES T_Endereco_Cadastro(id_end),
     CONSTRAINT fk_endereco_pref FOREIGN KEY (id_end_pref_fk) REFERENCES T_Endereco_Preferencia(id_end_pref),
     CONSTRAINT fk_preferencia_atendimento FOREIGN KEY (id_preferencia_atendimento_fk) REFERENCES T_Preferencia_Atendimento(id_preferencia_atendimento),
-    CONSTRAINT fk_cadastro_clie FOREIGN KEY (id_cad_clie_fk) REFERENCES T_Cadastro_Cliente(id_cad_clie)
+    CONSTRAINT fk_cadastro_clie FOREIGN KEY (id_cad_clie_fk) REFERENCES T_Cadastro_Cliente(id_cad_clie),
+    CONSTRAINT fk_recompensa FOREIGN KEY (id_recompensa_fk) REFERENCES T_Recompensa(id_recompensa)
 );
 
--- 18. Tabela de Clínica
+-- 19. Tabela de Clínica
 CREATE TABLE T_Clinica (
     id_clinica INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     nome_clinica VARCHAR2(100) NOT NULL,
@@ -220,7 +242,7 @@ CREATE TABLE T_Clinica (
     CONSTRAINT fk_usuario FOREIGN KEY (id_usuario_fk) REFERENCES T_Usuario(id_user)
 );
 
--- 19. Tabela de Médico
+-- 20. Tabela de Médico
 CREATE TABLE T_Medico (
     id_med INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     nome_med VARCHAR2(100) NOT NULL,
@@ -240,7 +262,7 @@ CREATE TABLE T_Medico (
     CONSTRAINT fk_endereco_medico FOREIGN KEY (id_end_fk) REFERENCES T_Endereco_Cadastro(id_end)
 );
 
--- 20. Tabela de Login
+-- 21. Tabela de Login
 CREATE TABLE T_Login (
     id_login INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     id_usuario_fk INTEGER NOT NULL,
@@ -249,7 +271,7 @@ CREATE TABLE T_Login (
     CONSTRAINT fk_usuario_login FOREIGN KEY (id_usuario_fk) REFERENCES T_Usuario(id_user)
 );
 
--- 21. Tabela de Rotina de Cuidados
+-- 22. Tabela de Rotina de Cuidados
 CREATE TABLE T_Rotina_Cuidado (
     id_rotina_cuidados INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
     frequencia_escovacao VARCHAR2(50) NOT NULL,
@@ -258,4 +280,143 @@ CREATE TABLE T_Rotina_Cuidado (
     limpeza_profissional VARCHAR2(50) NOT NULL, -- 3 meses, 6 meses, 1 vez ao ano
     id_cliente_fk INTEGER NOT NULL,
     CONSTRAINT fk_cliente_rotina_cuidado FOREIGN KEY (id_cliente_fk) REFERENCES T_Cliente(id_clie)
+);
+
+-- 23. Tabela de Status
+CREATE TABLE T_Status (
+    id_status INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    desc_status VARCHAR2(50) NOT NULL -- pendente, aceito, recusado, em acionamento
+);
+
+-- 24. Tabela de Clínica Sugerida
+CREATE TABLE T_Clinica_Sugerida (
+    id_sugestao INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    id_cliente_fk INTEGER NOT NULL,
+    id_clinica_fk INTEGER NOT NULL,
+    id_medico_fk INTEGER NOT NULL,
+    id_especialidade_fk INTEGER NOT NULL,
+    data_consulta TIMESTAMP NOT NULL,
+    id_status_fk INTEGER NOT NULL,
+    data_envio_sugestao TIMESTAMP NOT NULL,
+    data_alteracao_status TIMESTAMP NOT NULL,
+    CONSTRAINT fk_cliente_sugestao FOREIGN KEY (id_cliente_fk) REFERENCES T_Cliente(id_clie),
+    CONSTRAINT fk_clinica_sugestao FOREIGN KEY (id_clinica_fk) REFERENCES T_Clinica(id_clinica),
+    CONSTRAINT fk_medico_sugestao FOREIGN KEY (id_medico_fk) REFERENCES T_Medico(id_med),
+    CONSTRAINT fk_especialidade_sugestao FOREIGN KEY (id_especialidade_fk) REFERENCES T_Especialidade(id_esp),
+    CONSTRAINT fk_status_sugestao FOREIGN KEY (id_status_fk) REFERENCES T_Status(id_status)
+);
+
+-- 25. Tabela de Agendamento
+CREATE TABLE T_Agendamento (
+    id_agendamento INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    id_cliente_fk INTEGER NOT NULL,
+    id_medico_fk INTEGER NOT NULL,
+    id_clinica_fk INTEGER NOT NULL,
+    data_sugerida TIMESTAMP NOT NULL,
+    horario_sugerido VARCHAR2(50) NOT NULL,
+    id_status_agendamento_fk INTEGER NOT NULL,
+    data_resposta TIMESTAMP,
+    hora_resposta TIMESTAMP,
+    data_criacao TIMESTAMP NOT NULL,
+    CONSTRAINT fk_cliente_agendamento FOREIGN KEY (id_cliente_fk) REFERENCES T_Cliente(id_clie),
+    CONSTRAINT fk_medico_agendamento FOREIGN KEY (id_medico_fk) REFERENCES T_Medico(id_med),
+    CONSTRAINT fk_clinica_agendamento FOREIGN KEY (id_clinica_fk) REFERENCES T_Clinica(id_clinica),
+    CONSTRAINT fk_status_agendamento FOREIGN KEY (id_status_agendamento_fk) REFERENCES T_Status(id_status)
+);
+
+-- 26. Tabela de Notificações
+CREATE TABLE T_Notificacao (
+    id_notificacao INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    id_cliente_fk INTEGER NOT NULL,
+    id_agendamento_fk INTEGER NOT NULL,
+    id_status_fk INTEGER NOT NULL,
+    data_envio TIMESTAMP NOT NULL,
+    CONSTRAINT fk_cliente_notificacao FOREIGN KEY (id_cliente_fk) REFERENCES T_Cliente(id_clie),
+    CONSTRAINT fk_agendamento_notificacao FOREIGN KEY (id_agendamento_fk) REFERENCES T_Agendamento(id_agendamento),
+    CONSTRAINT fk_status_notificacao FOREIGN KEY (id_status_fk) REFERENCES T_Status(id_status)
+);
+
+-- 27. Tabela de Preferências de Notificações
+CREATE TABLE T_Preferencia_Notificacao (
+    id_preferencia_notificacao INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    id_cliente_fk INTEGER NOT NULL,
+    id_tipo_notificacao_fk INTEGER NOT NULL,
+    status_preferencia VARCHAR2(50) NOT NULL, -- ativa ou desativada
+    data_atualizacao TIMESTAMP NOT NULL,
+    CONSTRAINT fk_cliente_preferencia_notificacao FOREIGN KEY (id_cliente_fk) REFERENCES T_Cliente(id_clie),
+    CONSTRAINT fk_tipo_notificacao FOREIGN KEY (id_tipo_notificacao_fk) REFERENCES T_Status(id_status)
+);
+
+-- 28. Tabela de Consulta
+CREATE TABLE T_Consulta (
+    id_consulta INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    id_cliente_fk INTEGER NOT NULL,
+    id_medico_fk INTEGER NOT NULL,
+    id_status_consulta_fk INTEGER NOT NULL,
+    data_consulta TIMESTAMP NOT NULL,
+    valor_consulta DECIMAL(10, 2) NOT NULL,
+    id_feedback_fk INTEGER,
+    CONSTRAINT fk_cliente_consulta FOREIGN KEY (id_cliente_fk) REFERENCES T_Cliente(id_clie),
+    CONSTRAINT fk_medico_consulta FOREIGN KEY (id_medico_fk) REFERENCES T_Medico(id_med),
+    CONSTRAINT fk_status_consulta FOREIGN KEY (id_status_consulta_fk) REFERENCES T_Status(id_status)
+);
+
+-- 29. Tabela de Parcerias
+CREATE TABLE T_Parceria (
+    id_parceria INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    nome_parceiro VARCHAR2(100) NOT NULL,
+    id_tipo_parceria_fk INTEGER NOT NULL,
+    descricao VARCHAR2(255),
+    data_inicio TIMESTAMP NOT NULL,
+    data_fim TIMESTAMP,
+    CONSTRAINT fk_tipo_parceria FOREIGN KEY (id_tipo_parceria_fk) REFERENCES T_Status(id_status)
+);
+
+-- 30. Tabela de Tarefas
+CREATE TABLE T_Tarefa (
+    id_tarefa INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    descricao_tarefa VARCHAR2(255) NOT NULL
+);
+
+-- 31. Tabela de Programa de Benefício
+CREATE TABLE T_Programa_Beneficio (
+    id_programa_beneficio INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    id_tarefa_fk INTEGER NOT NULL,
+    id_medico_fk INTEGER NOT NULL,
+    data_inicio TIMESTAMP NOT NULL,
+    data_fim TIMESTAMP,
+    condicao_aplicacao VARCHAR2(255) NOT NULL,
+    id_status_fk INTEGER NOT NULL,
+    CONSTRAINT fk_tarefa_beneficio FOREIGN KEY (id_tarefa_fk) REFERENCES T_Tarefa(id_tarefa),
+    CONSTRAINT fk_medico_beneficio FOREIGN KEY (id_medico_fk) REFERENCES T_Medico(id_med),
+    CONSTRAINT fk_status_beneficio FOREIGN KEY (id_status_fk) REFERENCES T_Status(id_status)
+);
+
+-- 32. Tabela de Avaliações
+CREATE TABLE T_Avaliacao (
+    id_avaliacao INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    id_cliente_fk INTEGER NOT NULL,
+    id_medico_fk INTEGER NOT NULL,
+    nota_medico INTEGER NOT NULL,
+    id_clinica_fk INTEGER NOT NULL,
+    nota_clinica INTEGER NOT NULL,
+    media_nota DECIMAL(3, 2) NOT NULL,
+    CONSTRAINT fk_cliente_avaliacao FOREIGN KEY (id_cliente_fk) REFERENCES T_Cliente(id_clie),
+    CONSTRAINT fk_medico_avaliacao FOREIGN KEY (id_medico_fk) REFERENCES T_Medico(id_med),
+    CONSTRAINT fk_clinica_avaliacao FOREIGN KEY (id_clinica_fk) REFERENCES T_Clinica(id_clinica)
+);
+
+-- 33. Tabela de Pesquisa de Satisfação
+CREATE TABLE T_Pesquisa_Satisfacao (
+    id_pesquisa INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY,
+    id_cliente_fk INTEGER NOT NULL,
+    id_consulta_fk INTEGER NOT NULL,
+    recomendacao_medico VARCHAR2(255) NOT NULL,
+    nota_medico INTEGER NOT NULL,
+    recomendacao_clinica VARCHAR2(255),
+    nota_clinica INTEGER,
+    comentarios VARCHAR2(500),
+    data_pesquisa TIMESTAMP NOT NULL,
+    CONSTRAINT fk_cliente_pesquisa FOREIGN KEY (id_cliente_fk) REFERENCES T_Cliente(id_clie),
+    CONSTRAINT fk_consulta_pesquisa FOREIGN KEY (id_consulta_fk) REFERENCES T_Consulta(id_consulta)
 );

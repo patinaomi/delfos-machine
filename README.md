@@ -1,9 +1,10 @@
 
 
+
 # Challenge Odontoprev 
 <p align="center">  <img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>  </p>
 
-Repositório criado para a organização e hospedagem dos projetos de Challenge da FIAP, correspondente à sprint 1.
+Repositório criado para a organização e hospedagem dos projetos de Challenge da FIAP, correspondente as sprint 1 e 2 do 3º semestre do curso de Análise e Desenvolvimento de Sistemas.
 
 ## Índice
  * [Challenge Odontoprev](#challenge-odontoprev)
@@ -17,6 +18,8 @@ Repositório criado para a organização e hospedagem dos projetos de Challenge 
 
 ## 📹 Video Pitch
 
+Em construção
+
 [:arrow_up: voltar para o índice :arrow_up:](#índice)
 
 ## ⁉️ Desafios e Problemas
@@ -27,16 +30,18 @@ O desafio proposto é voltado para a Redução de Sinistros por meio da Análise
 
 ## 🚩 Solução Apresentada
 
+Em construção
+
 [:arrow_up: voltar para o índice :arrow_up:](#índice)
 
 ## 🗂️ Disciplinas
-* [DevOps Tools & Cloud Computing](https://github.com/patinaomi/sprint-3-fiap/tree/main/AI%20%26%20Chatbot)
-* [Compliance, Quality Assurance & Tests](https://github.com/patinaomi/sprint-3-fiap/tree/main/Building%20Relational%20Database)
-* [Mastering Relational and Non-Relational Database](https://github.com/patinaomi/sprint-3-fiap/tree/main/Computational%20Thinking%20Using%20Python)
-* [Advanced Business Development with .Net](https://github.com/patinaomi/sprint-3-fiap/tree/main/Domain%20Driven%20Design)
-* [Disruptive Architectures: IOT, IOB & Generative IA](https://github.com/patinaomi/sprint-3-fiap/tree/main/Responsive%20Web%20Development)
-* [Java Advanced](https://github.com/patinaomi/sprint-3-fiap/tree/main/Software%20Design%20%26%20Total%20Experience)
-* [Mobile Application Development](https://github.com/patinaomi/sprint-3-fiap/tree/main/Software%20Design%20%26%20Total%20Experience)
+* [DevOps Tools & Cloud Computing](https://github.com/patinaomi/delfos-machine/tree/main/DevOps%20Tools%20%26%20Cloud%20Computing)
+* [Compliance, Quality Assurance & Tests](https://github.com/patinaomi/delfos-machine/tree/main/Compliance%2C%20Quality%20Assurance%20%26%20Tests)
+* [Mastering Relational and Non-Relational Database](https://github.com/patinaomi/delfos-machine/tree/main/Mastering%20Relational%20And%20Non%20Relational%20Database)
+* [Advanced Business Development with .Net](https://github.com/patinaomi/delfos-machine/tree/main/Advanced%20Business%20With%20.NET)
+* [Disruptive Architectures: IOT, IOB & Generative IA](https://github.com/patinaomi/delfos-machine/tree/main/Disruptive%20Architectures%3A%20IOT%20%26%20IOB)
+* [Java Advanced](https://github.com/patinaomi/delfos-machine/tree/main/JAVA%20ADVANCED)
+* [Mobile Application Development](https://github.com/patinaomi/delfos-machine/tree/main/Mobile%20Application%20Development)
 
 [:arrow_up: voltar para o índice :arrow_up:](#índice)
 

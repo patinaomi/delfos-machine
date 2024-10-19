@@ -63,7 +63,6 @@ public class FormularioDetalhadoController {
             FormularioDetalhado formularioSalvo = formularioDetalhadoService.criar(formulario);
 
             FormularioDetalhadoResponse formularioResponse = FormularioDetalhadoResponse.builder()
-                    .idFormulario(formularioSalvo.getIdFormulario())
                     .cliente(formularioSalvo.getCliente())
                     .estadoCivil(formularioSalvo.getEstadoCivil())
                     .historicoFamiliar(formularioSalvo.getHistoricoFamiliar())
@@ -107,7 +106,7 @@ public class FormularioDetalhadoController {
 
     @Operation(summary = "Buscar formulário por ID", description = "Retorna um formulário detalhado com base no ID fornecido")
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<?> buscarPorId(@PathVariable String id) {
         try {
             FormularioDetalhado formulario = formularioDetalhadoService.buscarPorId(id);
             return ResponseEntity.ok(formulario);
@@ -120,7 +119,7 @@ public class FormularioDetalhadoController {
 
     @Operation(summary = "Atualizar formulário", description = "Atualiza os dados de um formulário detalhado com base no ID fornecido")
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody FormularioDetalhadoRequest formularioRequest) {
+    public ResponseEntity<?> atualizar(@PathVariable String id, @Valid @RequestBody FormularioDetalhadoRequest formularioRequest) {
         try {
             FormularioDetalhado formulario = FormularioDetalhado.builder()
                     .cliente(formularioRequest.getCliente())
@@ -155,7 +154,7 @@ public class FormularioDetalhadoController {
 
     @Operation(summary = "Deletar formulário", description = "Deleta um formulário detalhado com base no ID fornecido")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletar(@PathVariable Long id) {
+    public ResponseEntity<?> deletar(@PathVariable String id) {
         try {
             formularioDetalhadoService.deletar(id);
             return ResponseEntity.ok("Formulário com ID " + id + " foi deletado com sucesso.");
@@ -173,7 +172,7 @@ public class FormularioDetalhadoController {
             @ApiResponse(responseCode = "404", description = "Formulário não encontrado"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
-    public ResponseEntity<?> atualizarParcialmente(@PathVariable Long id, @RequestBody FormularioDetalhadoUpdateRequest formularioDetalhadoUpdateRequest) {
+    public ResponseEntity<?> atualizarParcialmente(@PathVariable String id, @RequestBody FormularioDetalhadoUpdateRequest formularioDetalhadoUpdateRequest) {
         try {
             FormularioDetalhado formulario = formularioDetalhadoService.buscarPorId(id);
 

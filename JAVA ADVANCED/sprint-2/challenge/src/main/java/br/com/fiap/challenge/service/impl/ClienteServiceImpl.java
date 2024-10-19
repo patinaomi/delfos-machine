@@ -21,7 +21,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Cliente buscarPorId(Long id) {
+    public Cliente buscarPorId(String id) {
         return clienteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
     }
@@ -32,7 +32,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Cliente atualizar(Long id, Cliente cliente) {
+    public Cliente atualizar(String id, Cliente cliente) {
         if (clienteRepository.existsById(id)) {
             cliente.setIdCliente(id);
             cliente.setTelefone(limparCaracteresTel(cliente.getTelefone())); // Limpeza do telefone antes de atualizar
@@ -43,7 +43,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void deletar(Long id) {
+    public void deletar(String id) {
         if (clienteRepository.existsById(id)) {
             clienteRepository.deleteById(id);
         } else {

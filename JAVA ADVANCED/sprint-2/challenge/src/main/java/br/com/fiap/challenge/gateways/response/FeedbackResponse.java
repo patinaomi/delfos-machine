@@ -5,14 +5,15 @@ import br.com.fiap.challenge.domains.Clinica;
 import br.com.fiap.challenge.domains.Dentista;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
 @Builder
 @Data
-public record FeedbackResponse(
-        Long idFeedback,
-        Cliente cliente,
-        Dentista dentista,
-        Clinica clinica,
-        Float avaliacao,
-        String comentario
-) {}
+public class FeedbackResponse extends RepresentationModel<FeedbackResponse> {
+
+        Cliente cliente;
+        Dentista dentista;
+        Clinica clinica;
+        Float avaliacao;
+        String comentario;
+}

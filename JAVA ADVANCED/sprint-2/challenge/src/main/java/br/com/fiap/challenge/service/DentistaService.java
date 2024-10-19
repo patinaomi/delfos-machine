@@ -7,8 +7,8 @@ import java.util.List;
 public interface DentistaService {
 
     Dentista criar(Dentista dentista);
-    Dentista buscarPorId(Long id);
+    Dentista buscarPorId(String id);
     List<Dentista> buscarTodos();
-    Dentista atualizar(Long id, Dentista dentista);
-    void deletar(Long id);
+    Dentista atualizar(String id, Dentista dentista);
+    void deletar(String id);
 }

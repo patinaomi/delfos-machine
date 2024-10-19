@@ -52,7 +52,6 @@ public class SinistroController {
             Sinistro sinistroSalvo = sinistroService.criar(sinistro);
 
             SinistroResponse sinistroResponse = SinistroResponse.builder()
-                    .idSinistro(sinistroSalvo.getIdSinistro())
                     .consulta(sinistroSalvo.getConsulta())
                     .nome(sinistroSalvo.getNome())
                     .descricao(sinistroSalvo.getDescricao())
@@ -86,7 +85,7 @@ public class SinistroController {
 
     @Operation(summary = "Buscar sinistro por ID", description = "Retorna um sinistro com base no ID fornecido")
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<?> buscarPorId(@PathVariable String id) {
         try {
             Sinistro sinistro = sinistroService.buscarPorId(id);
             return ResponseEntity.ok(sinistro);
@@ -99,7 +98,7 @@ public class SinistroController {
 
     @Operation(summary = "Atualizar sinistro", description = "Atualiza os dados de um sinistro com base no ID fornecido")
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody SinistroRequest sinistroRequest) {
+    public ResponseEntity<?> atualizar(@PathVariable String id, @Valid @RequestBody SinistroRequest sinistroRequest) {
         try {
             Sinistro sinistro = Sinistro.builder()
                     .consulta(sinistroRequest.getConsulta())
@@ -124,7 +123,7 @@ public class SinistroController {
 
     @Operation(summary = "Deletar sinistro", description = "Deleta um sinistro com base no ID fornecido")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletar(@PathVariable Long id) {
+    public ResponseEntity<?> deletar(@PathVariable String id) {
         try {
             sinistroService.deletar(id);
             return ResponseEntity.ok("Sinistro com ID " + id + " foi deletado com sucesso.");
@@ -142,7 +141,7 @@ public class SinistroController {
             @ApiResponse(responseCode = "404", description = "Sinistro não encontrado"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
-    public ResponseEntity<?> atualizarParcialmente(@PathVariable Long id, @RequestBody SinistroUpdateRequest sinistroUpdateRequest) {
+    public ResponseEntity<?> atualizarParcialmente(@PathVariable String id, @RequestBody SinistroUpdateRequest sinistroUpdateRequest) {
         try {
             Sinistro sinistro = sinistroService.buscarPorId(id);
 

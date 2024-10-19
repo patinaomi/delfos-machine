@@ -49,7 +49,6 @@ public class DentistaController {
             Dentista dentistaSalvo = dentistaService.criar(dentista);
 
             DentistaResponse dentistaResponse = DentistaResponse.builder()
-                    .idDentista(dentistaSalvo.getIdDentista())
                     .nome(dentistaSalvo.getNome())
                     .sobrenome(dentistaSalvo.getSobrenome())
                     .telefone(dentistaSalvo.getTelefone())
@@ -80,7 +79,7 @@ public class DentistaController {
 
     @Operation(summary = "Buscar dentista por ID", description = "Retorna um dentista com base no ID fornecido")
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<?> buscarPorId(@PathVariable String id) {
         try {
             Dentista dentista = dentistaService.buscarPorId(id);
             return ResponseEntity.ok(dentista);
@@ -93,7 +92,7 @@ public class DentistaController {
 
     @Operation(summary = "Atualizar dentista", description = "Atualiza os dados de um dentista com base no ID fornecido")
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody DentistaRequest dentistaRequest) {
+    public ResponseEntity<?> atualizar(@PathVariable String id, @Valid @RequestBody DentistaRequest dentistaRequest) {
         try {
             Dentista dentista = Dentista.builder()
                     .nome(dentistaRequest.getNome())
@@ -115,7 +114,7 @@ public class DentistaController {
 
     @Operation(summary = "Deletar dentista", description = "Deleta um dentista com base no ID fornecido")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletar(@PathVariable Long id) {
+    public ResponseEntity<?> deletar(@PathVariable String id) {
         try {
             dentistaService.deletar(id);
             return ResponseEntity.ok("Dentista com ID " + id + " foi deletado com sucesso.");
@@ -133,7 +132,7 @@ public class DentistaController {
             @ApiResponse(responseCode = "404", description = "Dentista não encontrado"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
-    public ResponseEntity<?> atualizarParcialmente(@PathVariable Long id, @RequestBody DentistaUpdateRequest dentistaUpdateRequest) {
+    public ResponseEntity<?> atualizarParcialmente(@PathVariable String id, @RequestBody DentistaUpdateRequest dentistaUpdateRequest) {
         try {
             Dentista dentista = dentistaService.buscarPorId(id);
 

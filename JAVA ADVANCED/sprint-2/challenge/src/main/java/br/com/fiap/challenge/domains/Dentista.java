@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 public class Dentista {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_dentista", nullable = false)
-    private Long idDentista;
+    private String idDentista;
 
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;

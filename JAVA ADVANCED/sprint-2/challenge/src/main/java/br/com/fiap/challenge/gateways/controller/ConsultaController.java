@@ -55,7 +55,6 @@ public class ConsultaController {
             Consulta consultaSalva = consultaService.criar(consulta);
 
             ConsultaResponse consultaResponse = ConsultaResponse.builder()
-                    .idConsulta(consultaSalva.getIdConsulta())
                     .cliente(consultaSalva.getCliente())
                     .clinica(consultaSalva.getClinica())
                     .dentista(consultaSalva.getDentista())
@@ -67,7 +66,7 @@ public class ConsultaController {
                     .tratamentoRecomendado(consultaSalva.getTratamentoRecomendado())
                     .custo(consultaSalva.getCusto())
                     .prescricao(consultaSalva.getPrescricao())
-                    .dataRetorno(consultaSalva.getDataRetorno())
+                    //.dataRetorno(consultaSalva.getDataRetorno())
                     .build();
 
             return ResponseEntity.status(HttpStatus.CREATED).body(consultaResponse);
@@ -92,7 +91,7 @@ public class ConsultaController {
 
     @Operation(summary = "Buscar consulta por ID", description = "Retorna uma consulta com base no ID fornecido")
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<?> buscarPorId(@PathVariable String id) {
         try {
             Consulta consulta = consultaService.buscarPorId(id);
             return ResponseEntity.ok(consulta);
@@ -105,7 +104,7 @@ public class ConsultaController {
 
     @Operation(summary = "Atualizar consulta", description = "Atualiza os dados de uma consulta com base no ID fornecido")
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody ConsultaRequest consultaRequest) {
+    public ResponseEntity<?> atualizar(@PathVariable String id, @Valid @RequestBody ConsultaRequest consultaRequest) {
         try {
             Consulta consulta = Consulta.builder()
                     .cliente(consultaRequest.getCliente())
@@ -133,7 +132,7 @@ public class ConsultaController {
 
     @Operation(summary = "Deletar consulta", description = "Deleta uma consulta com base no ID fornecido")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletar(@PathVariable Long id) {
+    public ResponseEntity<?> deletar(@PathVariable String id) {
         try {
             consultaService.deletar(id);
             return ResponseEntity.ok("Consulta com ID " + id + " foi deletada com sucesso.");
@@ -151,7 +150,7 @@ public class ConsultaController {
             @ApiResponse(responseCode = "404", description = "Consulta não encontrada"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
-    public ResponseEntity<?> atualizarParcialmente(@PathVariable Long id, @RequestBody ConsultaUpdateRequest consultaUpdateRequest) {
+    public ResponseEntity<?> atualizarParcialmente(@PathVariable String id, @RequestBody ConsultaUpdateRequest consultaUpdateRequest) {
         try {
             Consulta consulta = consultaService.buscarPorId(id);
 

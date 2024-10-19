@@ -21,7 +21,7 @@ public class DentistaServiceImpl implements DentistaService {
     }
 
     @Override
-    public Dentista buscarPorId(Long id) {
+    public Dentista buscarPorId(String id) {
         return dentistaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Dentista não encontrado"));
     }
@@ -32,7 +32,7 @@ public class DentistaServiceImpl implements DentistaService {
     }
 
     @Override
-    public Dentista atualizar(Long id, Dentista dentista) {
+    public Dentista atualizar(String id, Dentista dentista) {
         if (dentistaRepository.existsById(id)) {
             dentista.setIdDentista(id);
             return dentistaRepository.save(dentista);
@@ -42,7 +42,7 @@ public class DentistaServiceImpl implements DentistaService {
     }
 
     @Override
-    public void deletar(Long id) {
+    public void deletar(String id) {
         if (dentistaRepository.existsById(id)) {
             dentistaRepository.deleteById(id);
         } else {

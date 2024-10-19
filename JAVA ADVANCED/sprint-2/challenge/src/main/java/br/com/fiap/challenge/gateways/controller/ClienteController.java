@@ -17,6 +17,8 @@ import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
 
 import java.util.List;
 
@@ -43,7 +45,6 @@ public class ClienteController {
     public ResponseEntity<?> criar(@Valid @RequestBody ClienteRequest clienteRequest) {
         try {
             Cliente cliente = Cliente.builder()
-                    .idCliente(clienteRequest.getId())
                     .nome(clienteRequest.getNome())
                     .sobrenome(clienteRequest.getSobrenome())
                     .email(clienteRequest.getEmail())
@@ -63,7 +64,9 @@ public class ClienteController {
                     .endereco(clienteSalvo.getEndereco())
                     .build();
 
-            clienteResponse.add(Link.of("http://localhost:8080/clientes/criar/" + clienteRequest.getId()));
+            Link link = linkTo(ClienteController.class).slash(cliente.getIdCliente()).withSelfRel();
+            clienteResponse.add(link);
+
             return ResponseEntity.status(HttpStatus.CREATED).body(clienteResponse);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar o cliente: " + e.getMessage());
@@ -86,7 +89,7 @@ public class ClienteController {
 
     @Operation(summary = "Buscar cliente por ID", description = "Retorna um cliente com base no ID fornecido")
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<?> buscarPorId(@PathVariable String id) {
         try {
             Cliente cliente = clienteService.buscarPorId(id);
             return ResponseEntity.ok(cliente);
@@ -99,7 +102,7 @@ public class ClienteController {
 
     @Operation(summary = "Atualizar cliente", description = "Atualiza os dados de um cliente com base no ID fornecido")
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody ClienteRequest clienteRequest) {
+    public ResponseEntity<?> atualizar(@PathVariable String id, @Valid @RequestBody ClienteRequest clienteRequest) {
         try {
             Cliente cliente = Cliente.builder()
                     .nome(clienteRequest.getNome())
@@ -121,7 +124,7 @@ public class ClienteController {
 
     @Operation(summary = "Deletar cliente", description = "Deleta um cliente com base no ID fornecido")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletar(@PathVariable Long id) {
+    public ResponseEntity<?> deletar(@PathVariable String id) {
         try {
             clienteService.deletar(id);
             return ResponseEntity.ok("Cliente com ID " + id + " foi deletado com sucesso.");
@@ -140,7 +143,7 @@ public class ClienteController {
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
 
-    public ResponseEntity<?> atualizarParcialmente(@PathVariable Long id, @RequestBody ClienteUpdateRequest clienteUpdateRequest) {
+    public ResponseEntity<?> atualizarParcialmente(@PathVariable String id, @RequestBody ClienteUpdateRequest clienteUpdateRequest) {
         try {
             Cliente cliente = clienteService.buscarPorId(id);
 

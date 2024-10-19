@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 @Builder
 @Data
-public class ClienteResponse extends RepresentationModel<ClienteResponse>
-{
+public class ClienteResponse extends RepresentationModel<ClienteResponse> {
+
     String nome;
     String sobrenome;
     String email;

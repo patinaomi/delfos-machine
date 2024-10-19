@@ -5,9 +5,10 @@ import br.com.fiap.challenge.domains.Feedback;
 import java.util.List;
 
 public interface FeedbackService {
+
     Feedback criar(Feedback feedback);
-    Feedback buscarPorId(Long id);
+    Feedback buscarPorId(String id);
     List<Feedback> buscarTodos();
-    Feedback atualizar(Long id, Feedback feedback);
-    void deletar(Long id);
+    Feedback atualizar(String id, Feedback feedback);
+    void deletar(String id);
 }

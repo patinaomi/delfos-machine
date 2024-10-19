@@ -7,12 +7,12 @@ import lombok.Data;
 
 @Builder
 @Data
-public record DentistaResponse(
-        Long idDentista,
-        String nome,
-        String sobrenome,
-        String telefone,
-        Clinica clinica,
-        Especialidade especialidade,
-        Float avaliacao
-) {}
+public class DentistaResponse {
+
+        String nome;
+        String sobrenome;
+        String telefone;
+        Clinica clinica;
+        Especialidade especialidade;
+        Float avaliacao;
+}

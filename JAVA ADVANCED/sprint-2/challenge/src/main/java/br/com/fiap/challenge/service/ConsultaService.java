@@ -5,9 +5,10 @@ import br.com.fiap.challenge.domains.Consulta;
 import java.util.List;
 
 public interface ConsultaService {
+
     Consulta criar(Consulta consulta);
-    Consulta buscarPorId(Long id);
+    Consulta buscarPorId(String id);
     List<Consulta> buscarTodas();
-    Consulta atualizar(Long id, Consulta consulta);
-    void deletar(Long id);
+    Consulta atualizar(String id, Consulta consulta);
+    void deletar(String id);
 }

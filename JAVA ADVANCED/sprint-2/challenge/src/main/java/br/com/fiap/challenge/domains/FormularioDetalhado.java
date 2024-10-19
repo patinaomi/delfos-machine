@@ -15,9 +15,9 @@ import java.util.Date;
 public class FormularioDetalhado {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_formulario")
-    private Long idFormulario;
+    private String idFormulario;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", nullable = false)

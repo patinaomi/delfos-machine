@@ -48,7 +48,6 @@ public class FeedbackController {
             Feedback feedbackSalvo = feedbackService.criar(feedback);
 
             FeedbackResponse feedbackResponse = FeedbackResponse.builder()
-                    .idFeedback(feedbackSalvo.getIdFeedback())
                     .cliente(feedbackSalvo.getCliente())
                     .dentista(feedbackSalvo.getDentista())
                     .clinica(feedbackSalvo.getClinica())
@@ -78,7 +77,7 @@ public class FeedbackController {
 
     @Operation(summary = "Buscar feedback por ID", description = "Retorna um feedback com base no ID fornecido")
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<?> buscarPorId(@PathVariable String id) {
         try {
             Feedback feedback = feedbackService.buscarPorId(id);
             return ResponseEntity.ok(feedback);
@@ -91,7 +90,7 @@ public class FeedbackController {
 
     @Operation(summary = "Atualizar feedback", description = "Atualiza os dados de um feedback com base no ID fornecido")
     @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable Long id, @Valid @RequestBody FeedbackRequest feedbackRequest) {
+    public ResponseEntity<?> atualizar(@PathVariable String id, @Valid @RequestBody FeedbackRequest feedbackRequest) {
         try {
             Feedback feedback = Feedback.builder()
                     .cliente(feedbackRequest.getCliente())
@@ -112,7 +111,7 @@ public class FeedbackController {
 
     @Operation(summary = "Deletar feedback", description = "Deleta um feedback com base no ID fornecido")
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletar(@PathVariable Long id) {
+    public ResponseEntity<?> deletar(@PathVariable String id) {
         try {
             feedbackService.deletar(id);
             return ResponseEntity.ok("Feedback com ID " + id + " foi deletado com sucesso.");
@@ -130,7 +129,7 @@ public class FeedbackController {
             @ApiResponse(responseCode = "404", description = "Feedback não encontrado"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
-    public ResponseEntity<?> atualizarParcialmente(@PathVariable Long id, @RequestBody FeedbackUpdateRequest feedbackUpdateRequest) {
+    public ResponseEntity<?> atualizarParcialmente(@PathVariable String id, @RequestBody FeedbackUpdateRequest feedbackUpdateRequest) {
         try {
             Feedback feedback = feedbackService.buscarPorId(id);
 

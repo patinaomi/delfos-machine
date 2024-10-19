@@ -17,9 +17,9 @@ import java.time.LocalDate;
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_cliente", nullable = false)
-    private Long idCliente;
+    private String idCliente;
 
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;

@@ -20,7 +20,7 @@ public class ConsultaServiceImpl implements ConsultaService {
     }
 
     @Override
-    public Consulta buscarPorId(Long id) {
+    public Consulta buscarPorId(String id) {
         return consultaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Consulta não encontrada"));
     }
@@ -31,7 +31,7 @@ public class ConsultaServiceImpl implements ConsultaService {
     }
 
     @Override
-    public Consulta atualizar(Long id, Consulta consulta) {
+    public Consulta atualizar(String id, Consulta consulta) {
         if (consultaRepository.existsById(id)) {
             consulta.setIdConsulta(id);
             return consultaRepository.save(consulta);
@@ -41,7 +41,7 @@ public class ConsultaServiceImpl implements ConsultaService {
     }
 
     @Override
-    public void deletar(Long id) {
+    public void deletar(String id) {
         if (consultaRepository.existsById(id)) {
             consultaRepository.deleteById(id);
         } else {

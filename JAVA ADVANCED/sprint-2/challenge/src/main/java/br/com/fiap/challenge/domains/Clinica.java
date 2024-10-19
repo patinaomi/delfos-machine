@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 public class Clinica {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_clinica", nullable = false)
-    private Long idClinica;
+    private String idClinica;
 
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;
@@ -28,10 +28,10 @@ public class Clinica {
     @Column(name = "telefone", length = 15, nullable = false)
     private String telefone;
 
-    @Column(name = "avaliacao")
+    @Column(name = "avaliacao", nullable = false)
     private Float avaliacao;
 
-    @Column(name = "preco_medio")
+    @Column(name = "preco_medio", nullable = false)
     private Double precoMedio;
 
 }

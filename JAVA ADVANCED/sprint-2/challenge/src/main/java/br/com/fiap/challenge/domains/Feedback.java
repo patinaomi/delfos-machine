@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 public class Feedback {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_feedback", nullable = false)
-    private Long idFeedback;
+    private String idFeedback;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", nullable = false)

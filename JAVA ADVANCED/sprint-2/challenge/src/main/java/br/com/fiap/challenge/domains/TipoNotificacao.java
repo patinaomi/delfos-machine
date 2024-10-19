@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 public class TipoNotificacao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_tipo_notificacao", nullable = false)
-    private Long idTipoNotificacao;
+    private String idTipoNotificacao;
 
     @Column(name = "descricao", length = 40, nullable = false)
     private String descricao;

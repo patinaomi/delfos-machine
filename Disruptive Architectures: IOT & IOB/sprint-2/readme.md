@@ -32,6 +32,18 @@ Utilizar o formulário de cadastro para coletar informações como localização
 ***O que será feito - Oracle***
 Essas informações já estão no banco de dados, para coletar elas, usaremos a bilioteca do Oracle para conectar no banco e criar um dataframe.
 
+```bash
+  import pandas as pd
+  import oracledb
+  
+  # Minhas credenciais
+  credencial_banco = {
+      'dsn': 'oracle.fiap.com.br:1521/orcl',
+      'usuario': 'rm553472',
+      'senha': ''
+  }
+```
+
 ***O que será feito - Pandas***
 Processar Dados com Pandas: Utilizar a biblioteca Pandas para organizar e analisar os dados dos clientes.
 

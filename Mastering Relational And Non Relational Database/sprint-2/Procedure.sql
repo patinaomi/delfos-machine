@@ -571,3 +571,62 @@ EXEC inserir_clinica('Clínica Saude e Sorriso', 'Rua das Flores, 123', '1198765
 EXEC atualizar_clinica (1, 'Nome Atualizado da Clinica', 'Endereço Atualizado', '987654321', 5, 200);
 EXEC deletar_clinica(1);
 
+
+-- Procedure para INSERT na Tabela Especialidade
+select * from especialidade;
+
+CREATE OR REPLACE PROCEDURE inserir_especialidade(
+    p_nome IN VARCHAR2
+) IS
+BEGIN
+    -- Inserir especialidade
+    INSERT INTO Especialidade (nome)
+    VALUES (p_nome);
+
+    DBMS_OUTPUT.PUT_LINE('Especialidade inserida com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao inserir especialidade: ' || SQLERRM);
+END;
+
+-- Procedure para UPDATE na Tabela Especialidade
+
+CREATE OR REPLACE PROCEDURE atualizar_especialidade(
+    p_id_especialidade IN INTEGER,
+    p_nome IN VARCHAR2
+) IS
+BEGIN
+    -- Atualizar especialidade
+    UPDATE Especialidade
+    SET nome = p_nome
+    WHERE id_especialidade = p_id_especialidade;
+
+    DBMS_OUTPUT.PUT_LINE('Especialidade atualizada com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao atualizar especialidade: ' || SQLERRM);
+END;
+
+-- Procedure para DELETE na Tabela Especialidade
+
+CREATE OR REPLACE PROCEDURE deletar_especialidade(
+    p_id_especialidade IN INTEGER
+) IS
+BEGIN
+    -- Deletar especialidade
+    DELETE FROM Especialidade
+    WHERE id_especialidade = p_id_especialidade;
+
+    DBMS_OUTPUT.PUT_LINE('Especialidade deletada com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao deletar especialidade: ' || SQLERRM);
+END;
+
+-- Teste
+select * from especialidade;
+EXEC inserir_especialidade('Ortodontia');
+EXEC atualizar_especialidade(1, 'Endodontia');
+EXEC deletar_especialidade(1);
+
+

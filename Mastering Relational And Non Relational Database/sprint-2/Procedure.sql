@@ -177,6 +177,261 @@ CREATE TABLE Notificacao (
     CONSTRAINT fk_notificacao_tipo FOREIGN KEY (id_tipo_notificacao) REFERENCES Tipo_Notificacao(id_tipo_notificacao)
 );
 
+// Precisamos dos inserts para validar algumas Procedures, pois elas possuem chaves estrangeiras
+
+-- Inserts Cliente
+
+INSERT INTO Cliente (nome, sobrenome, email, telefone, data_nasc, endereco) VALUES
+('Alice', 'Silva', 'alice.silva@example.com', '11987654321', TO_DATE('1990-01-15', 'YYYY-MM-DD'), 'Rua das Flores, 123');
+
+INSERT INTO Cliente (nome, sobrenome, email, telefone, data_nasc, endereco) VALUES
+('Bruno', 'Santos', 'bruno.santos@example.com', '11976543210', TO_DATE('1985-03-20', 'YYYY-MM-DD'), 'Avenida Central, 456');
+
+INSERT INTO Cliente (nome, sobrenome, email, telefone, data_nasc, endereco) VALUES
+('Carlos', 'Oliveira', 'carlos.oliveira@example.com', '11965432109', TO_DATE('1992-07-11', 'YYYY-MM-DD'), 'Rua dos Lírios, 789');
+
+INSERT INTO Cliente (nome, sobrenome, email, telefone, data_nasc, endereco) VALUES
+('Diana', 'Pereira', 'diana.pereira@example.com', '11954321098', TO_DATE('1988-04-22', 'YYYY-MM-DD'), 'Praça das Árvores, 321');
+
+INSERT INTO Cliente (nome, sobrenome, email, telefone, data_nasc, endereco) VALUES
+('Eduardo', 'Melo', 'eduardo.melo@example.com', '11943210987', TO_DATE('1980-09-05', 'YYYY-MM-DD'), 'Avenida do Sol, 654');
+
+INSERT INTO Cliente (nome, sobrenome, email, telefone, data_nasc, endereco) VALUES
+('Fernanda', 'Costa', 'fernanda.costa@example.com', '11932109876', TO_DATE('1995-12-30', 'YYYY-MM-DD'), 'Rua das Estrelas, 852');
+
+INSERT INTO Cliente (nome, sobrenome, email, telefone, data_nasc, endereco) VALUES
+('Gabriel', 'Santos', 'gabriel.santos@example.com', '11921098765', TO_DATE('1991-11-19', 'YYYY-MM-DD'), 'Rua das Palmeiras, 963');
+
+INSERT INTO Cliente (nome, sobrenome, email, telefone, data_nasc, endereco) VALUES
+('Helena', 'Lima', 'helena.lima@example.com', '11910987654', TO_DATE('1989-06-15', 'YYYY-MM-DD'), 'Avenida das Rosas, 147');
+
+INSERT INTO Cliente (nome, sobrenome, email, telefone, data_nasc, endereco) VALUES
+('Igor', 'Barros', 'igor.barros@example.com', '11898765432', TO_DATE('1994-03-29', 'YYYY-MM-DD'), 'Rua das Acácias, 258');
+
+INSERT INTO Cliente (nome, sobrenome, email, telefone, data_nasc, endereco) VALUES
+('Juliana', 'Martins', 'juliana.martins@example.com', '11787654321', TO_DATE('1993-08-10', 'YYYY-MM-DD'), 'Avenida da Paz, 369');
+
+select * from Cliente;
+
+-- Clinica
+
+INSERT INTO Clinica (nome, endereco, telefone, avaliacao, preco_medio) VALUES ('Clínica Saúde e Sorriso', 'Rua das Flores, 123', '11987654321', 4.5, 150.00);
+INSERT INTO Clinica (nome, endereco, telefone, avaliacao, preco_medio) VALUES ('Clínica Odontológica São José', 'Avenida Central, 456', '11976543210', 4.0, 200.00);
+INSERT INTO Clinica (nome, endereco, telefone, avaliacao, preco_medio) VALUES ('Clínica Dental Plus', 'Rua da Esperança, 789', '11965432109', 5.0, 250.00);
+INSERT INTO Clinica (nome, endereco, telefone, avaliacao, preco_medio) VALUES ('OdontoCare', 'Avenida Brasil, 321', '11954321098', 3.8, 180.00);
+INSERT INTO Clinica (nome, endereco, telefone, avaliacao, preco_medio) VALUES ('Clínica do Sorriso', 'Rua das Acácias, 654', '11943210987', 4.2, 170.00);
+INSERT INTO Clinica (nome, endereco, telefone, avaliacao, preco_medio) VALUES ('Clínica OdontoMax', 'Praça da Saúde, 135', '11932109876', 4.7, 220.00);
+INSERT INTO Clinica (nome, endereco, telefone, avaliacao, preco_medio) VALUES ('Centro Dental', 'Alameda dos Anjos, 246', '11921098765', 4.1, 160.00);
+INSERT INTO Clinica (nome, endereco, telefone, avaliacao, preco_medio) VALUES ('Clínica Vida e Sorriso', 'Rua do Progresso, 357', '11910987654', 4.6, 190.00);
+INSERT INTO Clinica (nome, endereco, telefone, avaliacao, preco_medio) VALUES ('Consultório Odontológico Esperança', 'Beco do Sorriso, 888', '11909876543', 3.9, 175.00);
+INSERT INTO Clinica (nome, endereco, telefone, avaliacao, preco_medio) VALUES ('Clínica Nova Esperança', 'Rua do Futuro, 101', '11998765432', 4.8, 210.00);
+
+select * from Clinica;
+
+-- Especialidade
+
+INSERT INTO Especialidade (nome) VALUES ('Ortodontia');
+INSERT INTO Especialidade (nome) VALUES ('Implantodontia');
+INSERT INTO Especialidade (nome) VALUES ('Odontopediatria');
+INSERT INTO Especialidade (nome) VALUES ('Periodontia');
+INSERT INTO Especialidade (nome) VALUES ('Endodontia');
+INSERT INTO Especialidade (nome) VALUES ('Odontologia Estética');
+INSERT INTO Especialidade (nome) VALUES ('Cirurgia Bucomaxilofacial');
+INSERT INTO Especialidade (nome) VALUES ('Prótese Dentária');
+INSERT INTO Especialidade (nome) VALUES ('Dentística');
+INSERT INTO Especialidade (nome) VALUES ('Higiene Dental');
+
+select * from Especialidade;
+
+-- Dentista
+
+INSERT INTO Dentista (nome, sobrenome, telefone, id_clinica, id_especialidade, avaliacao) VALUES ('Carlos', 'Menezes', '11987654321', 1, 1, 4.5);
+INSERT INTO Dentista (nome, sobrenome, telefone, id_clinica, id_especialidade, avaliacao) VALUES ('Fernanda', 'Pereira', '11976543210', 1, 2, 5.0);
+INSERT INTO Dentista (nome, sobrenome, telefone, id_clinica, id_especialidade, avaliacao) VALUES ('Roberto', 'Almeida', '11965432109', 2, 3, 4.0);
+INSERT INTO Dentista (nome, sobrenome, telefone, id_clinica, id_especialidade, avaliacao) VALUES ('Mariana', 'Souza', '11954321098', 2, 4, 4.7);
+INSERT INTO Dentista (nome, sobrenome, telefone, id_clinica, id_especialidade, avaliacao) VALUES ('André', 'Lima', '11943210987', 1, 5, 3.5);
+INSERT INTO Dentista (nome, sobrenome, telefone, id_clinica, id_especialidade, avaliacao) VALUES ('Juliana', 'Silva', '11932109876', 3, 6, 4.8);
+INSERT INTO Dentista (nome, sobrenome, telefone, id_clinica, id_especialidade, avaliacao) VALUES ('Ricardo', 'Santos', '11921098765', 3, 7, 4.2);
+INSERT INTO Dentista (nome, sobrenome, telefone, id_clinica, id_especialidade, avaliacao) VALUES ('Aline', 'Costa', '11910987654', 1, 8, 4.6);
+INSERT INTO Dentista (nome, sobrenome, telefone, id_clinica, id_especialidade, avaliacao) VALUES ('Felipe', 'Martins', '11909876543', 2, 9, 3.9);
+INSERT INTO Dentista (nome, sobrenome, telefone, id_clinica, id_especialidade, avaliacao) VALUES ('Tatiane', 'Ferreira', '11998765432', 3, 10, 5.0);
+
+select * from Dentista;
+
+-- Consulta
+
+INSERT INTO Consulta (id_cliente, id_clinica, id_dentista, tipo_servico, data_consulta, status_consulta, observacoes, sintomas, tratamento_recomendado, custo, prescricao, data_retorno) VALUES (1, 1, 1, 'Check-up', TO_TIMESTAMP('2024-10-01 10:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'S', 'Consulta de rotina', 'Nenhum', 'Manter higiene bucal', 150.00, 'Fluoretação', TO_DATE('2024-10-15', 'YYYY-MM-DD'));
+INSERT INTO Consulta (id_cliente, id_clinica, id_dentista, tipo_servico, data_consulta, status_consulta, observacoes, sintomas, tratamento_recomendado, custo, prescricao, data_retorno) VALUES (2, 1, 1, 'Limpeza', TO_TIMESTAMP('2024-10-02 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'S', 'Limpeza dental regular', 'Acúmulo de tártaro', 'Limpeza profunda', 200.00, 'Nenhum', TO_DATE('2024-10-16', 'YYYY-MM-DD'));
+INSERT INTO Consulta (id_cliente, id_clinica, id_dentista, tipo_servico, data_consulta, status_consulta, observacoes, sintomas, tratamento_recomendado, custo, prescricao, data_retorno) VALUES (3, 2, 2, 'Consulta de emergência', TO_TIMESTAMP('2024-10-03 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'S', 'Dor de dente', 'Dor intensa', 'Tratamento de canal', 500.00, 'Analgésicos', TO_DATE('2024-10-20', 'YYYY-MM-DD'));
+INSERT INTO Consulta (id_cliente, id_clinica, id_dentista, tipo_servico, data_consulta, status_consulta, observacoes, sintomas, tratamento_recomendado, custo, prescricao, data_retorno) VALUES (4, 2, 2, 'Check-up', TO_TIMESTAMP('2024-10-04 09:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'S', 'Consulta de rotina', 'Sem queixas', 'Manter cuidados', 150.00, 'Fluoretação', TO_DATE('2024-10-18', 'YYYY-MM-DD'));
+INSERT INTO Consulta (id_cliente, id_clinica, id_dentista, tipo_servico, data_consulta, status_consulta, observacoes, sintomas, tratamento_recomendado, custo, prescricao, data_retorno) VALUES (5, 3, 3, 'Limpeza', TO_TIMESTAMP('2024-10-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'N', 'Limpeza programada', 'Alguma dor', 'Limpeza e acompanhamento', 220.00, 'Analgésicos', TO_DATE('2024-10-22', 'YYYY-MM-DD'));
+INSERT INTO Consulta (id_cliente, id_clinica, id_dentista, tipo_servico, data_consulta, status_consulta, observacoes, sintomas, tratamento_recomendado, custo, prescricao, data_retorno) VALUES (6, 3, 3, 'Consulta de emergência', TO_TIMESTAMP('2024-10-06 15:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'S', 'Dor na gengiva', 'Dor constante', 'Antibióticos', 300.00, 'Antibióticos', TO_DATE('2024-10-23', 'YYYY-MM-DD'));
+INSERT INTO Consulta (id_cliente, id_clinica, id_dentista, tipo_servico, data_consulta, status_consulta, observacoes, sintomas, tratamento_recomendado, custo, prescricao, data_retorno) VALUES (7, 1, 1, 'Check-up', TO_TIMESTAMP('2024-10-07 13:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'S', 'Consulta de rotina', 'Nenhum', 'Manter higiene bucal', 150.00, 'Fluoretação', TO_DATE('2024-10-24', 'YYYY-MM-DD'));
+INSERT INTO Consulta (id_cliente, id_clinica, id_dentista, tipo_servico, data_consulta, status_consulta, observacoes, sintomas, tratamento_recomendado, custo, prescricao, data_retorno) VALUES (8, 1, 1, 'Limpeza', TO_TIMESTAMP('2024-10-08 10:30:00', 'YYYY-MM-DD HH24:MI:SS'), 'N', 'Limpeza agendada', 'Acúmulo de tártaro', 'Limpeza profunda', 200.00, 'Nenhum', TO_DATE('2024-10-25', 'YYYY-MM-DD'));
+INSERT INTO Consulta (id_cliente, id_clinica, id_dentista, tipo_servico, data_consulta, status_consulta, observacoes, sintomas, tratamento_recomendado, custo, prescricao, data_retorno) VALUES (9, 2, 2, 'Consulta de emergência', TO_TIMESTAMP('2024-10-09 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'S', 'Dor de dente', 'Dor intensa', 'Tratamento de canal', 500.00, 'Analgésicos', TO_DATE('2024-10-30', 'YYYY-MM-DD'));
+INSERT INTO Consulta (id_cliente, id_clinica, id_dentista, tipo_servico, data_consulta, status_consulta, observacoes, sintomas, tratamento_recomendado, custo, prescricao, data_retorno) VALUES (10, 3, 3, 'Check-up', TO_TIMESTAMP('2024-10-10 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'S', 'Consulta de rotina', 'Sem queixas', 'Manter cuidados', 150.00, 'Fluoretação', TO_DATE('2024-10-31', 'YYYY-MM-DD'));
+
+select * from Consulta;
+
+-- Sinistro
+
+INSERT INTO Sinistro (id_consulta, nome, descricao, status_sinistro, descricao_status, valor_sinistro, data_abertura, data_resolucao, documentacao) VALUES (1, 'Sinistro 1', 'Quebra de dente durante a consulta', 'S', 'Aguardando documentação', 1000.00, TO_DATE('2024-10-01', 'YYYY-MM-DD'), NULL, 'documento1.pdf');
+INSERT INTO Sinistro (id_consulta, nome, descricao, status_sinistro, descricao_status, valor_sinistro, data_abertura, data_resolucao, documentacao) VALUES (2, 'Sinistro 2', 'Reação alérgica após tratamento', 'S', 'Em análise', 800.00, TO_DATE('2024-10-02', 'YYYY-MM-DD'), NULL, 'documento2.pdf');
+INSERT INTO Sinistro (id_consulta, nome, descricao, status_sinistro, descricao_status, valor_sinistro, data_abertura, data_resolucao, documentacao) VALUES (3, 'Sinistro 3', 'Dor intensa após procedimento', 'N', 'Resolvido', 500.00, TO_DATE('2024-10-03', 'YYYY-MM-DD'), TO_DATE('2024-10-10', 'YYYY-MM-DD'), 'documento3.pdf');
+INSERT INTO Sinistro (id_consulta, nome, descricao, status_sinistro, descricao_status, valor_sinistro, data_abertura, data_resolucao, documentacao) VALUES (4, 'Sinistro 4', 'Infeção após extração', 'S', 'Aguardando avaliação', 1200.00, TO_DATE('2024-10-04', 'YYYY-MM-DD'), NULL, 'documento4.pdf');
+INSERT INTO Sinistro (id_consulta, nome, descricao, status_sinistro, descricao_status, valor_sinistro, data_abertura, data_resolucao, documentacao) VALUES (5, 'Sinistro 5', 'Lesão na gengiva', 'S', 'Aguardando resposta do dentista', 300.00, TO_DATE('2024-10-05', 'YYYY-MM-DD'), NULL, 'documento5.pdf');
+INSERT INTO Sinistro (id_consulta, nome, descricao, status_sinistro, descricao_status, valor_sinistro, data_abertura, data_resolucao, documentacao) VALUES (6, 'Sinistro 6', 'Complicação com anestesia', 'N', 'Resolvido', 600.00, TO_DATE('2024-10-06', 'YYYY-MM-DD'), TO_DATE('2024-10-11', 'YYYY-MM-DD'), 'documento6.pdf');
+INSERT INTO Sinistro (id_consulta, nome, descricao, status_sinistro, descricao_status, valor_sinistro, data_abertura, data_resolucao, documentacao) VALUES (7, 'Sinistro 7', 'Queixa de dor persistente', 'S', 'Em avaliação', 400.00, TO_DATE('2024-10-07', 'YYYY-MM-DD'), NULL, 'documento7.pdf');
+INSERT INTO Sinistro (id_consulta, nome, descricao, status_sinistro, descricao_status, valor_sinistro, data_abertura, data_resolucao, documentacao) VALUES (8, 'Sinistro 8', 'Tratamento de canal falhou', 'S', 'Aguardando revisão', 900.00, TO_DATE('2024-10-08', 'YYYY-MM-DD'), NULL, 'documento8.pdf');
+INSERT INTO Sinistro (id_consulta, nome, descricao, status_sinistro, descricao_status, valor_sinistro, data_abertura, data_resolucao, documentacao) VALUES (9, 'Sinistro 9', 'Problema na prótese', 'N', 'Resolvido', 700.00, TO_DATE('2024-10-09', 'YYYY-MM-DD'), TO_DATE('2024-10-15', 'YYYY-MM-DD'), 'documento9.pdf');
+INSERT INTO Sinistro (id_consulta, nome, descricao, status_sinistro, descricao_status, valor_sinistro, data_abertura, data_resolucao, documentacao) VALUES (10, 'Sinistro 10', 'Queixa de mau hálito persistente', 'S', 'Aguardando consulta adicional', 200.00, TO_DATE('2024-10-10', 'YYYY-MM-DD'), NULL, 'documento10.pdf');
+
+select * from Sinistro;
+
+-- Feedback
+
+INSERT INTO Feedback (id_cliente, id_dentista, id_clinica, avaliacao, comentario) VALUES (1, 1, 1, 5, 'Ótimo atendimento!');
+INSERT INTO Feedback (id_cliente, id_dentista, id_clinica, avaliacao, comentario) VALUES (2, 1, 1, 4, 'A consulta foi muito boa.');
+INSERT INTO Feedback (id_cliente, id_dentista, id_clinica, avaliacao, comentario) VALUES (3, 2, 2, 5, 'Profissional atencioso e cuidadoso.');
+INSERT INTO Feedback (id_cliente, id_dentista, id_clinica, avaliacao, comentario) VALUES (4, 2, 2, 4, 'Ambiente agradável.');
+INSERT INTO Feedback (id_cliente, id_dentista, id_clinica, avaliacao, comentario) VALUES (5, 3, 3, 3, 'Esperava mais, mas foi tudo bem.');
+INSERT INTO Feedback (id_cliente, id_dentista, id_clinica, avaliacao, comentario) VALUES (6, 3, 3, 4, 'Consulta rápida e eficaz.');
+INSERT INTO Feedback (id_cliente, id_dentista, id_clinica, avaliacao, comentario) VALUES (7, 1, 1, 5, 'Recomendo para todos!');
+INSERT INTO Feedback (id_cliente, id_dentista, id_clinica, avaliacao, comentario) VALUES (8, 2, 2, 4, 'Foi uma experiência positiva.');
+INSERT INTO Feedback (id_cliente, id_dentista, id_clinica, avaliacao, comentario) VALUES (9, 1, 1, 3, 'Um pouco de espera, mas no geral bom.');
+INSERT INTO Feedback (id_cliente, id_dentista, id_clinica, avaliacao, comentario) VALUES (10, 3, 3, 5, 'Atendimento de qualidade.');
+
+select * from Feedback;
+
+-- Estado Civil
+
+INSERT INTO Estado_Civil (descricao) VALUES ('Solteiro');
+INSERT INTO Estado_Civil (descricao) VALUES ('Casado');
+INSERT INTO Estado_Civil (descricao) VALUES ('Divorciado');
+INSERT INTO Estado_Civil (descricao) VALUES ('Viúvo');
+INSERT INTO Estado_Civil (descricao) VALUES ('União Estável');
+INSERT INTO Estado_Civil (descricao) VALUES ('Separado');
+INSERT INTO Estado_Civil (descricao) VALUES ('Companheiro');
+INSERT INTO Estado_Civil (descricao) VALUES ('Desquitado');
+INSERT INTO Estado_Civil (descricao) VALUES ('Noivo');
+INSERT INTO Estado_Civil (descricao) VALUES ('Namorando');
+
+select * from Estado_Civil;
+
+-- Formulario Detalhado
+
+INSERT INTO Formulario_Detalhado (id_cliente, id_estado_civil, historico_familiar, profissao, renda_mensal, historico_medico, alergia, condicao_preexistente, uso_medicamento, familiar_com_doencas_dentarias, participacao_em_programas_preventivos, contato_emergencial, pesquisa_satisfacao, data_ultima_atualizacao, frequencia_consulta_periodica, sinalizacao_de_risco, historico_de_viagem, historico_de_mudancas_de_endereco, preferencia_de_contato) VALUES 
+(1, 1, 'Nenhum histórico significativo', 'Engenheiro', 5000.00, 'Saudável', 'Nenhuma', 'Hipertensão', 'Apenas paracetamol', 'Não', 'Y', 'Mãe', 'Y', SYSDATE, 'Y', 'Nenhuma', 'Viagens internacionais', 'Mudanças a cada 2 anos', 'Email');
+
+INSERT INTO Formulario_Detalhado (id_cliente, id_estado_civil, historico_familiar, profissao, renda_mensal, historico_medico, alergia, condicao_preexistente, uso_medicamento, familiar_com_doencas_dentarias, participacao_em_programas_preventivos, contato_emergencial, pesquisa_satisfacao, data_ultima_atualizacao, frequencia_consulta_periodica, sinalizacao_de_risco, historico_de_viagem, historico_de_mudancas_de_endereco, preferencia_de_contato) VALUES 
+(2, 2, 'Apenas histórico de diabetes na família', 'Médico', 7000.00, 'Saudável', 'Nenhuma', 'Asma', 'Nenhum', 'Sim', 'Y', 'Pai', 'Y', SYSDATE, 'Y', 'Risco baixo', 'Viagens a trabalho', 'Mudança recente', 'Telefone');
+
+INSERT INTO Formulario_Detalhado (id_cliente, id_estado_civil, historico_familiar, profissao, renda_mensal, historico_medico, alergia, condicao_preexistente, uso_medicamento, familiar_com_doencas_dentarias, participacao_em_programas_preventivos, contato_emergencial, pesquisa_satisfacao, data_ultima_atualizacao, frequencia_consulta_periodica, sinalizacao_de_risco, historico_de_viagem, historico_de_mudancas_de_endereco, preferencia_de_contato) VALUES 
+(3, 3, 'Histórico de problemas cardíacos', 'Professor', 4000.00, 'Diabetes', 'Alergia a pó', 'Diabetes tipo 2', 'Insulina', 'Sim', 'N', 'Irmã', 'Y', SYSDATE, 'N', 'Risco moderado', 'Sem viagens', 'Mudanças frequentes', 'WhatsApp');
+
+INSERT INTO Formulario_Detalhado (id_cliente, id_estado_civil, historico_familiar, profissao, renda_mensal, historico_medico, alergia, condicao_preexistente, uso_medicamento, familiar_com_doencas_dentarias, participacao_em_programas_preventivos, contato_emergencial, pesquisa_satisfacao, data_ultima_atualizacao, frequencia_consulta_periodica, sinalizacao_de_risco, historico_de_viagem, historico_de_mudancas_de_endereco, preferencia_de_contato) VALUES 
+(4, 4, 'Nenhum histórico familiar relevante', 'Advogado', 6000.00, 'Saudável', 'Alergia a amendoim', 'Nenhuma', 'Nenhum', 'Não', 'Y', 'Esposa', 'Y', SYSDATE, 'Y', 'Risco baixo', 'Viagens de férias', 'Mudança a cada 5 anos', 'Email');
+
+INSERT INTO Formulario_Detalhado (id_cliente, id_estado_civil, historico_familiar, profissao, renda_mensal, historico_medico, alergia, condicao_preexistente, uso_medicamento, familiar_com_doencas_dentarias, participacao_em_programas_preventivos, contato_emergencial, pesquisa_satisfacao, data_ultima_atualizacao, frequencia_consulta_periodica, sinalizacao_de_risco, historico_de_viagem, historico_de_mudancas_de_endereco, preferencia_de_contato) VALUES 
+(5, 5, 'Histórico de câncer na família', 'Arquiteto', 5500.00, 'Saudável', 'Alergia a poeira', 'Nenhuma', 'Nenhum', 'Sim', 'Y', 'Filho', 'N', SYSDATE, 'Y', 'Risco alto', 'Viagens frequentes', 'Mudança há 1 ano', 'Telefone');
+
+INSERT INTO Formulario_Detalhado (id_cliente, id_estado_civil, historico_familiar, profissao, renda_mensal, historico_medico, alergia, condicao_preexistente, uso_medicamento, familiar_com_doencas_dentarias, participacao_em_programas_preventivos, contato_emergencial, pesquisa_satisfacao, data_ultima_atualizacao, frequencia_consulta_periodica, sinalizacao_de_risco, historico_de_viagem, historico_de_mudancas_de_endereco, preferencia_de_contato) VALUES 
+(6, 6, 'Nenhum histórico significativo', 'Dentista', 7500.00, 'Saudável', 'Alergia a medicamentos', 'Nenhuma', 'Nenhum', 'Não', 'Y', 'Amigo', 'Y', SYSDATE, 'N', 'Risco baixo', 'Viagens a trabalho', 'Mudança a cada 3 anos', 'WhatsApp');
+
+INSERT INTO Formulario_Detalhado (id_cliente, id_estado_civil, historico_familiar, profissao, renda_mensal, historico_medico, alergia, condicao_preexistente, uso_medicamento, familiar_com_doencas_dentarias, participacao_em_programas_preventivos, contato_emergencial, pesquisa_satisfacao, data_ultima_atualizacao, frequencia_consulta_periodica, sinalizacao_de_risco, historico_de_viagem, historico_de_mudancas_de_endereco, preferencia_de_contato) VALUES 
+(7, 7, 'Histórico de doenças respiratórias', 'Cientista', 4500.00, 'Saudável', 'Alergia a fumaça', 'Nenhuma', 'Nenhum', 'Sim', 'N', 'Cônjuge', 'Y', SYSDATE, 'Y', 'Risco moderado', 'Sem viagens', 'Mudanças frequentes', 'Email');
+
+INSERT INTO Formulario_Detalhado (id_cliente, id_estado_civil, historico_familiar, profissao, renda_mensal, historico_medico, alergia, condicao_preexistente, uso_medicamento, familiar_com_doencas_dentarias, participacao_em_programas_preventivos, contato_emergencial, pesquisa_satisfacao, data_ultima_atualizacao, frequencia_consulta_periodica, sinalizacao_de_risco, historico_de_viagem, historico_de_mudancas_de_endereco, preferencia_de_contato) VALUES 
+(8, 8, 'Nenhum histórico familiar relevante', 'Motorista', 3000.00, 'Saudável', 'Alergia a látex', 'Nenhuma', 'Nenhum', 'Não', 'Y', 'Irmão', 'Y', SYSDATE, 'N', 'Risco baixo', 'Viagens ocasionais', 'Mudança a cada 4 anos', 'Telefone');
+
+INSERT INTO Formulario_Detalhado (id_cliente, id_estado_civil, historico_familiar, profissao, renda_mensal, historico_medico, alergia, condicao_preexistente, uso_medicamento, familiar_com_doencas_dentarias, participacao_em_programas_preventivos, contato_emergencial, pesquisa_satisfacao, data_ultima_atualizacao, frequencia_consulta_periodica, sinalizacao_de_risco, historico_de_viagem, historico_de_mudancas_de_endereco, preferencia_de_contato) VALUES 
+(9, 9, 'Histórico de hipertensão', 'Estudante', 2000.00, 'Saudável', 'Nenhuma', 'Hipertensão', 'Apenas anti-hipertensivos', 'Sim', 'Y', 'Mãe', 'Y', SYSDATE, 'N', 'Risco baixo', 'Viagens de estudos', 'Mudança a cada 2 anos', 'Email');
+
+select * from Formulario_Detalhado;
+
+-- Tipo de notificação
+
+INSERT INTO Tipo_Notificacao (descricao) VALUES ('Lembrete de Consulta');
+INSERT INTO Tipo_Notificacao (descricao) VALUES ('Notificação de Pagamento');
+INSERT INTO Tipo_Notificacao (descricao) VALUES ('Confirmação de Agendamento');
+INSERT INTO Tipo_Notificacao (descricao) VALUES ('Cancelamento de Consulta');
+INSERT INTO Tipo_Notificacao (descricao) VALUES ('Promoção de Serviços');
+INSERT INTO Tipo_Notificacao (descricao) VALUES ('Atualização de Cadastro');
+INSERT INTO Tipo_Notificacao (descricao) VALUES ('Aviso de Documentação');
+INSERT INTO Tipo_Notificacao (descricao) VALUES ('Encaminhamento Médico');
+INSERT INTO Tipo_Notificacao (descricao) VALUES ('Pesquisa de Satisfação');
+INSERT INTO Tipo_Notificacao (descricao) VALUES ('Alerta de Saúde Preventiva');
+select * from Formulario_Detalhado;
+
+select * from Tipo_Notificacao;
+
+-- Agenda
+
+INSERT INTO Agenda (id_cliente, id_consulta, status_consulta, observacoes) 
+VALUES (1, 1, 'S', 'Consulta realizada com sucesso.');
+
+INSERT INTO Agenda (id_cliente, id_consulta, status_consulta, observacoes) 
+VALUES (2, 2, 'N', 'Consulta cancelada pelo cliente.');
+
+INSERT INTO Agenda (id_cliente, id_consulta, status_consulta, observacoes) 
+VALUES (3, 3, 'S', 'Consulta ocorreu conforme planejado.');
+
+INSERT INTO Agenda (id_cliente, id_consulta, status_consulta, observacoes) 
+VALUES (4, 4, 'S', 'Cliente compareceu na hora marcada.');
+
+INSERT INTO Agenda (id_cliente, id_consulta, status_consulta, observacoes) 
+VALUES (5, 5, 'N', 'Consulta reagendada para a próxima semana.');
+
+INSERT INTO Agenda (id_cliente, id_consulta, status_consulta, observacoes) 
+VALUES (6, 6, 'S', 'Procedimento realizado com sucesso.');
+
+INSERT INTO Agenda (id_cliente, id_consulta, status_consulta, observacoes) 
+VALUES (7, 7, 'N', 'Consulta não foi confirmada.');
+
+INSERT INTO Agenda (id_cliente, id_consulta, status_consulta, observacoes) 
+VALUES (8, 8, 'S', 'Cliente satisfeito com o atendimento.');
+
+INSERT INTO Agenda (id_cliente, id_consulta, status_consulta, observacoes) 
+VALUES (9, 9, 'N', 'Consulta não foi realizada.');
+
+INSERT INTO Agenda (id_cliente, id_consulta, status_consulta, observacoes) 
+VALUES (10, 10, 'S', 'Consulta finalizada e cliente orientado.');
+
+select * from Agenda;
+
+-- Notificação
+
+INSERT INTO Notificacao (id_cliente, id_tipo_notificacao, mensagem, data_envio) 
+VALUES (1, 1, 'Sua consulta está agendada para amanhã.', TO_DATE('2024-10-01', 'YYYY-MM-DD'));
+
+INSERT INTO Notificacao (id_cliente, id_tipo_notificacao, mensagem, data_envio) 
+VALUES (2, 2, 'Lembrete: é hora de realizar seu check-up anual.', TO_DATE('2024-09-25', 'YYYY-MM-DD'));
+
+INSERT INTO Notificacao (id_cliente, id_tipo_notificacao, mensagem, data_envio) 
+VALUES (3, 1, 'Consulta confirmada para a próxima segunda-feira.', TO_DATE('2024-09-28', 'YYYY-MM-DD'));
+
+INSERT INTO Notificacao (id_cliente, id_tipo_notificacao, mensagem, data_envio) 
+VALUES (4, 3, 'Obrigado pelo feedback! Aguardamos sua próxima visita.', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+INSERT INTO Notificacao (id_cliente, id_tipo_notificacao, mensagem, data_envio) 
+VALUES (5, 1, 'Sua consulta foi reagendada para a próxima sexta-feira.', TO_DATE('2024-10-03', 'YYYY-MM-DD'));
+
+INSERT INTO Notificacao (id_cliente, id_tipo_notificacao, mensagem, data_envio) 
+VALUES (6, 2, 'Faltam 7 dias para seu próximo exame preventivo.', TO_DATE('2024-10-04', 'YYYY-MM-DD'));
+
+INSERT INTO Notificacao (id_cliente, id_tipo_notificacao, mensagem, data_envio) 
+VALUES (7, 1, 'Aviso: consulta pendente de confirmação.', TO_DATE('2024-09-27', 'YYYY-MM-DD'));
+
+INSERT INTO Notificacao (id_cliente, id_tipo_notificacao, mensagem, data_envio) 
+VALUES (8, 3, 'Estamos prontos para recebê-lo em sua próxima consulta.', TO_DATE('2024-09-29', 'YYYY-MM-DD'));
+
+INSERT INTO Notificacao (id_cliente, id_tipo_notificacao, mensagem, data_envio) 
+VALUES (9, 2, 'Não se esqueça de manter suas consultas em dia.', TO_DATE('2024-09-26', 'YYYY-MM-DD'));
+
+INSERT INTO Notificacao (id_cliente, id_tipo_notificacao, mensagem, data_envio) 
+VALUES (10, 1, 'Sua consulta foi confirmada para amanhã às 10h.', TO_DATE('2024-09-30', 'YYYY-MM-DD'));
+
+select * from Notificacao;
 
 // Funções de Validação de Entrada de Dados
 
@@ -571,7 +826,6 @@ EXEC inserir_clinica('Clínica Saude e Sorriso', 'Rua das Flores, 123', '1198765
 EXEC atualizar_clinica (1, 'Nome Atualizado da Clinica', 'Endereço Atualizado', '987654321', 5, 200);
 EXEC deletar_clinica(1);
 
-
 -- Procedure para INSERT na Tabela Especialidade
 select * from especialidade;
 
@@ -629,4 +883,333 @@ EXEC inserir_especialidade('Ortodontia');
 EXEC atualizar_especialidade(1, 'Endodontia');
 EXEC deletar_especialidade(1);
 
+-- Procedure para INSERT na Tabela Dentista
 
+select * from dentista;
+
+CREATE OR REPLACE PROCEDURE inserir_dentista(
+    p_nome IN VARCHAR2,
+    p_sobrenome IN VARCHAR2,
+    p_telefone IN VARCHAR2,
+    p_id_clinica IN INTEGER,
+    p_id_especialidade IN INTEGER,
+    p_avaliacao IN NUMBER
+) IS
+BEGIN
+    -- Inserir dentista
+    INSERT INTO Dentista (nome, sobrenome, telefone, id_clinica, id_especialidade, avaliacao)
+    VALUES (p_nome, p_sobrenome, p_telefone, p_id_clinica, p_id_especialidade, p_avaliacao);
+
+    DBMS_OUTPUT.PUT_LINE('Dentista inserido com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao inserir dentista: ' || SQLERRM);
+END;
+
+-- Procedure para UPDATE na Tabela Dentista
+
+CREATE OR REPLACE PROCEDURE atualizar_dentista(
+    p_id_dentista IN INTEGER,
+    p_nome IN VARCHAR2,
+    p_sobrenome IN VARCHAR2,
+    p_telefone IN VARCHAR2,
+    p_id_clinica IN INTEGER,
+    p_id_especialidade IN INTEGER,
+    p_avaliacao IN NUMBER
+) IS
+BEGIN
+    -- Atualizar dentista
+    UPDATE Dentista
+    SET nome = p_nome,
+        sobrenome = p_sobrenome,
+        telefone = p_telefone,
+        id_clinica = p_id_clinica,
+        id_especialidade = p_id_especialidade,
+        avaliacao = p_avaliacao
+    WHERE id_dentista = p_id_dentista;
+
+    DBMS_OUTPUT.PUT_LINE('Dentista atualizado com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao atualizar dentista: ' || SQLERRM);
+END;
+
+-- Procedure para DELETE na Tabela Dentista
+
+CREATE OR REPLACE PROCEDURE deletar_dentista(
+    p_id_dentista IN INTEGER
+) IS
+BEGIN
+    -- Deletar dentista
+    DELETE FROM Dentista
+    WHERE id_dentista = p_id_dentista;
+
+    DBMS_OUTPUT.PUT_LINE('Dentista deletado com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao deletar dentista: ' || SQLERRM);
+END;
+
+-- Teste
+select * from dentista;
+
+-- Inserir dados na  tabela para achar a chave mãe, uma vez que não deixamos dados dentro das tabelas para realizar os testes das procedures
+INSERT INTO Especialidade (nome) VALUES ('Dentística');
+select * from especialidade;
+
+INSERT INTO Clinica (nome, endereco, telefone, avaliacao, preco_medio) VALUES ('Clinica Saude e Sorriso', 'Rua das Flores, 123', '11987654321', 4, 150);
+select * from Clinica;
+
+EXEC inserir_dentista('João', 'Silva', '11987654321', 2, 2, 4);
+EXEC atualizar_dentista(1, 'João', 'Silva', '11987654321', 1, 1, 5);
+
+select * from dentista;
+EXEC deletar_dentista(7); -- ajustar para o id que consta no select antes de executar. Defina o que deseja excluir.
+
+
+-- Procedure para INSERT na Tabela Feedback
+
+CREATE OR REPLACE PROCEDURE inserir_feedback(
+    p_id_cliente IN INTEGER,
+    p_id_dentista IN INTEGER,
+    p_id_clinica IN INTEGER,
+    p_avaliacao IN NUMBER,
+    p_comentario IN VARCHAR2
+) IS
+BEGIN
+    -- Inserir feedback
+    INSERT INTO Feedback (id_cliente, id_dentista, id_clinica, avaliacao, comentario)
+    VALUES (p_id_cliente, p_id_dentista, p_id_clinica, p_avaliacao, p_comentario);
+
+    DBMS_OUTPUT.PUT_LINE('Feedback inserido com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao inserir feedback: ' || SQLERRM);
+END;
+
+-- Procedure para UPDATE na Tabela Feedback
+
+CREATE OR REPLACE PROCEDURE atualizar_feedback(
+    p_id_feedback IN INTEGER,
+    p_id_cliente IN INTEGER,
+    p_id_dentista IN INTEGER,
+    p_id_clinica IN INTEGER,
+    p_avaliacao IN NUMBER,
+    p_comentario IN VARCHAR2
+) IS
+BEGIN
+    -- Atualizar feedback
+    UPDATE Feedback
+    SET id_cliente = p_id_cliente,
+        id_dentista = p_id_dentista,
+        id_clinica = p_id_clinica,
+        avaliacao = p_avaliacao,
+        comentario = p_comentario
+    WHERE id_feedback = p_id_feedback;
+
+    DBMS_OUTPUT.PUT_LINE('Feedback atualizado com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao atualizar feedback: ' || SQLERRM);
+END;
+
+-- Procedure para DELETE na Tabela Feedback
+
+CREATE OR REPLACE PROCEDURE deletar_feedback(
+    p_id_feedback IN INTEGER
+) IS
+BEGIN
+    -- Deletar feedback
+    DELETE FROM Feedback
+    WHERE id_feedback = p_id_feedback;
+
+    DBMS_OUTPUT.PUT_LINE('Feedback deletado com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao deletar feedback: ' || SQLERRM);
+END;
+
+-- Teste Feedback
+
+select * from Feedback;
+
+EXEC inserir_feedback(1, 1, 1, 4, 'Otimo atendimento!');
+EXEC atualizar_feedback(11, 1, 1, 1, 5, 'Atendimento excelente!');
+EXEC deletar_feedback(11);
+
+
+-- Procedure para INSERT na Tabela Consulta
+
+select * from Consulta;
+
+CREATE OR REPLACE PROCEDURE inserir_consulta(
+    p_id_cliente IN INTEGER,
+    p_id_clinica IN INTEGER,
+    p_id_dentista IN INTEGER,
+    p_tipo_servico IN VARCHAR2,
+    p_data_consulta IN TIMESTAMP,
+    p_status_consulta IN CHAR,
+    p_observacoes IN VARCHAR2,
+    p_sintomas IN VARCHAR2,
+    p_tratamento_recomendado IN VARCHAR2,
+    p_custo IN NUMBER,
+    p_prescricao IN VARCHAR2,
+    p_data_retorno IN DATE
+) IS
+BEGIN
+    -- Inserir consulta
+    INSERT INTO Consulta (id_cliente, id_clinica, id_dentista, tipo_servico, data_consulta, status_consulta, observacoes, sintomas, tratamento_recomendado, custo, prescricao, data_retorno)
+    VALUES (p_id_cliente, p_id_clinica, p_id_dentista, p_tipo_servico, p_data_consulta, p_status_consulta, p_observacoes, p_sintomas, p_tratamento_recomendado, p_custo, p_prescricao, p_data_retorno);
+
+    DBMS_OUTPUT.PUT_LINE('Consulta inserida com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao inserir consulta: ' || SQLERRM);
+END;
+
+-- Procedure para UPDATE na Tabela Consulta
+
+CREATE OR REPLACE PROCEDURE atualizar_consulta(
+    p_id_consulta IN INTEGER,
+    p_id_cliente IN INTEGER,
+    p_id_clinica IN INTEGER,
+    p_id_dentista IN INTEGER,
+    p_tipo_servico IN VARCHAR2,
+    p_data_consulta IN TIMESTAMP,
+    p_status_consulta IN CHAR,
+    p_observacoes IN VARCHAR2,
+    p_sintomas IN VARCHAR2,
+    p_tratamento_recomendado IN VARCHAR2,
+    p_custo IN NUMBER,
+    p_prescricao IN VARCHAR2,
+    p_data_retorno IN DATE
+) IS
+BEGIN
+    -- Atualizar consulta
+    UPDATE Consulta
+    SET id_cliente = p_id_cliente,
+        id_clinica = p_id_clinica,
+        id_dentista = p_id_dentista,
+        tipo_servico = p_tipo_servico,
+        data_consulta = p_data_consulta,
+        status_consulta = p_status_consulta,
+        observacoes = p_observacoes,
+        sintomas = p_sintomas,
+        tratamento_recomendado = p_tratamento_recomendado,
+        custo = p_custo,
+        prescricao = p_prescricao,
+        data_retorno = p_data_retorno
+    WHERE id_consulta = p_id_consulta;
+
+    DBMS_OUTPUT.PUT_LINE('Consulta atualizada com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao atualizar consulta: ' || SQLERRM);
+END;
+
+-- Procedure para DELETE na Tabela Consulta
+
+CREATE OR REPLACE PROCEDURE deletar_consulta(
+    p_id_consulta IN INTEGER
+) IS
+BEGIN
+    -- Deletar consulta
+    DELETE FROM Consulta
+    WHERE id_consulta = p_id_consulta;
+
+    DBMS_OUTPUT.PUT_LINE('Consulta deletada com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao deletar consulta: ' || SQLERRM);
+END;
+
+-- Testes
+
+select * from Consulta;
+
+EXEC inserir_consulta(1, 1, 1, 'Limpeza', TO_TIMESTAMP('2024-10-19 10:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'S', 'Nenhuma', 'Nenhum', 'Limpeza básica', 100, 'Nenhuma', TO_DATE('2024-11-19', 'YYYY-MM-DD'));
+EXEC atualizar_consulta(11, 1, 1, 1, 'Tirar o dente', TO_TIMESTAMP('2024-10-19 10:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'S', 'Nenhuma', 'Nenhum', 'Limpeza básica', 200, 'Nenhuma', TO_DATE('2024-11-19', 'YYYY-MM-DD'));
+EXEC deletar_consulta(11);
+
+
+-- Procedure para INSERT na Tabela Sinistro
+
+CREATE OR REPLACE PROCEDURE inserir_sinistro(
+    p_id_consulta IN INTEGER,
+    p_nome IN VARCHAR2,
+    p_descricao IN VARCHAR2,
+    p_status_sinistro IN CHAR,
+    p_descricao_status IN VARCHAR2,
+    p_valor_sinistro IN NUMBER,
+    p_data_abertura IN DATE,
+    p_data_resolucao IN DATE,
+    p_documentacao IN VARCHAR2
+) IS
+BEGIN
+    -- Inserir sinistro
+    INSERT INTO Sinistro (id_consulta, nome, descricao, status_sinistro, descricao_status, valor_sinistro, data_abertura, data_resolucao, documentacao)
+    VALUES (p_id_consulta, p_nome, p_descricao, p_status_sinistro, p_descricao_status, p_valor_sinistro, p_data_abertura, p_data_resolucao, p_documentacao);
+
+    DBMS_OUTPUT.PUT_LINE('Sinistro inserido com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao inserir sinistro: ' || SQLERRM);
+END;
+
+-- Procedure para UPDATE na Tabela Sinistro
+
+CREATE OR REPLACE PROCEDURE atualizar_sinistro(
+    p_id_sinistro IN INTEGER,
+    p_id_consulta IN INTEGER,
+    p_nome IN VARCHAR2,
+    p_descricao IN VARCHAR2,
+    p_status_sinistro IN CHAR,
+    p_descricao_status IN VARCHAR2,
+    p_valor_sinistro IN NUMBER,
+    p_data_abertura IN DATE,
+    p_data_resolucao IN DATE,
+    p_documentacao IN VARCHAR2
+) IS
+BEGIN
+    -- Atualizar sinistro
+    UPDATE Sinistro
+    SET id_consulta = p_id_consulta,
+        nome = p_nome,
+        descricao = p_descricao,
+        status_sinistro = p_status_sinistro,
+        descricao_status = p_descricao_status,
+        valor_sinistro = p_valor_sinistro,
+        data_abertura = p_data_abertura,
+        data_resolucao = p_data_resolucao,
+        documentacao = p_documentacao
+    WHERE id_sinistro = p_id_sinistro;
+
+    DBMS_OUTPUT.PUT_LINE('Sinistro atualizado com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao atualizar sinistro: ' || SQLERRM);
+END;
+
+-- Procedure para DELETE na Tabela Sinistro
+
+CREATE OR REPLACE PROCEDURE deletar_sinistro(
+    p_id_sinistro IN INTEGER
+) IS
+BEGIN
+    -- Deletar sinistro
+    DELETE FROM Sinistro
+    WHERE id_sinistro = p_id_sinistro;
+
+    DBMS_OUTPUT.PUT_LINE('Sinistro deletado com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao deletar sinistro: ' || SQLERRM);
+END;
+
+-- Teste Sinistro
+
+select * from Sinistro;
+
+EXEC inserir_sinistro(1, 'Sinistro Exemplo', 'Descrição do sinistro', 'S', 'Status do sinistro', 500, TO_DATE('2024-10-19', 'YYYY-MM-DD'), TO_DATE('2024-11-19', 'YYYY-MM-DD'), 'Documentação');
+EXEC atualizar_sinistro(11, 1, 'Sinistro Atualizado', 'Descrição atualizada', 'N', 'Status atualizado', 600, TO_DATE('2024-10-19', 'YYYY-MM-DD'), TO_DATE('2024-11-19', 'YYYY-MM-DD'), 'Documentação atualizada');
+EXEC deletar_sinistro(11);

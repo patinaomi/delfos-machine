@@ -21,3 +21,25 @@ ao invés de esperar que ele nos procure com problemas maiores.
 Por exemplo, se uma pessoa realiza limpezas e radiografias ósseas a cada 5 ou 6 meses, pode evitar extrações devido a cuidados bucais 
 inadequados, que podem custar cerca de dois mil reais. Em nosso cenário, esse valor é extremamente alto. É mais vantajoso cobrir uma consulta de 200 reais, que representa apenas 10% do custo de um procedimento emergencial.
 Além disso, vamos atender as clínicas e parceiros, levando mais clientes e aumentando sua carteira.
+
+## Etapas do projeto
+
+Será necessário implementar seis fases no nosso projeto, para que possamos atender a demanda da OdontoPrev
+
+**Coletar Dados do Cliente**
+Utilizar o formulário de cadastro para coletar informações como localização preferida pelo cliente, avaliações de satisfação das clinicas e médicos, além dos valores de consultas com preco acessível. Na solução apresentada, se tiver qualidade, mostra que mesmo com custo baixo, a consulta pode atender a necessidade do cliente.
+
+***O que será feito - Oracle***
+Essas informações já estão no banco de dados, para coletar elas, usaremos a bilioteca do Oracle para conectar no banco e criar um dataframe.
+
+***O que será feito - Pandas***
+Processar Dados com Pandas: Utilizar a biblioteca Pandas para organizar e analisar os dados dos clientes.
+
+
+
+
+***O que será feito - Pandas***
+Treinar Modelo com PyTorch: Utilizar PyTorch para treinar um modelo de IA que sugira consultas preventivas com base nos dados do cliente.
+Classificação com Scikit-Learn: Utilizar Scikit-Learn para classificar as clínicas e especialistas com base nas avaliações de satisfação.
+Visualização com Matplotlib: Utilizar Matplotlib para criar gráficos que mostrem os custos e economias das consultas sugeridas.
+API com Flask: Criar uma API com Flask para fornecer as sugestões de consultas ao aplicativo.

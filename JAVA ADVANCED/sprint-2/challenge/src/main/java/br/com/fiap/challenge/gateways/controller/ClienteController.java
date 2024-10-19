@@ -13,13 +13,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -81,7 +84,11 @@ public class ClienteController {
             if (clientes.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum cliente encontrado.");
             }
-            return ResponseEntity.ok(clientes);
+
+            Link selfLink = linkTo(methodOn(ClienteController.class).buscarTodos()).withSelfRel();
+            CollectionModel<List<Cliente>> result = CollectionModel.of(Collections.singleton(clientes), selfLink);
+
+            return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao buscar clientes: " + e.getMessage());
         }
@@ -92,6 +99,16 @@ public class ClienteController {
     public ResponseEntity<?> buscarPorId(@PathVariable String id) {
         try {
             Cliente cliente = clienteService.buscarPorId(id);
+            ClienteResponse clienteResponse = ClienteResponse.builder()
+                    .nome(cliente.getNome())
+                    .sobrenome(cliente.getSobrenome())
+                    .email(cliente.getEmail())
+                    .telefone(cliente.getTelefone())
+                    .dataNasc(cliente.getDataNasc())
+                    .endereco(cliente.getEndereco())
+                    .build();
+
+            clienteResponse.add(linkTo(methodOn(ClienteController.class).buscarPorId(id)).withSelfRel());
             return ResponseEntity.ok(cliente);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID " + id + " não encontrado.");
@@ -114,7 +131,20 @@ public class ClienteController {
                     .build();
 
             Cliente clienteAtualizado = clienteService.atualizar(id, cliente);
-            return ResponseEntity.ok(clienteAtualizado);
+
+            ClienteResponse clienteResponse = ClienteResponse.builder()
+                    .nome(clienteAtualizado.getNome())
+                    .sobrenome(clienteAtualizado.getSobrenome())
+                    .email(clienteAtualizado.getEmail())
+                    .telefone(clienteAtualizado.getTelefone())
+                    .dataNasc(clienteAtualizado.getDataNasc())
+                    .endereco(clienteAtualizado.getEndereco())
+                    .build();
+
+            Link link = linkTo(methodOn(ClienteController.class).buscarPorId(id)).withSelfRel();
+            clienteResponse.add(link);
+
+            return ResponseEntity.ok(clienteResponse);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID " + id + " não encontrado.");
         } catch (Exception e) {
@@ -147,7 +177,7 @@ public class ClienteController {
         try {
             Cliente cliente = clienteService.buscarPorId(id);
 
-            // Atualiza apenas os campos fornecidos que forem fornecidos no request
+            // Vai atualizar apenas os campos que forem fornecidos no request
             if (clienteUpdateRequest.getNome() != null) {
                 cliente.setNome(clienteUpdateRequest.getNome());
             }
@@ -168,6 +198,19 @@ public class ClienteController {
             }
 
             Cliente clienteAtualizado = clienteService.atualizar(id, cliente);
+
+            ClienteResponse clienteResponse = ClienteResponse.builder()
+                    .nome(clienteAtualizado.getNome())
+                    .sobrenome(clienteAtualizado.getSobrenome())
+                    .email(clienteAtualizado.getEmail())
+                    .telefone(clienteAtualizado.getTelefone())
+                    .dataNasc(clienteAtualizado.getDataNasc())
+                    .endereco(clienteAtualizado.getEndereco())
+                    .build();
+
+            Link link = linkTo(methodOn(ClienteController.class).buscarPorId(id)).withSelfRel();
+            clienteResponse.add(link);
+
             return ResponseEntity.ok(clienteAtualizado);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID " + id + " não encontrado.");

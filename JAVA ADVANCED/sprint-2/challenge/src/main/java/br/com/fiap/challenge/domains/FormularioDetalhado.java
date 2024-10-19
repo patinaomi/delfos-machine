@@ -16,7 +16,7 @@ public class FormularioDetalhado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id_formulario")
+    @Column(name = "id_formulario", nullable = false)
     private String idFormulario;
 
     @ManyToOne

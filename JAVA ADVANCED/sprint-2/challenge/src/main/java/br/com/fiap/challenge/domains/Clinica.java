@@ -17,7 +17,7 @@ public class Clinica {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id_clinica", nullable = false)
-    private String idClinica;
+    private String  idClinica;
 
     @Column(name = "nome", length = 100, nullable = false)
     private String nome;

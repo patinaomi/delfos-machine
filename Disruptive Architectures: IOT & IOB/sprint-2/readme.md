@@ -253,6 +253,28 @@ Vamos utilizar esta API para na sessão do Médico/Especialista, conste todos os
 
 ```
 
+**Testar com Postman**
+Teste simples para ele avaliar atendimentos 4 ou 5
+
+```bash
+    http://127.0.0.1:6001/classificar_feedback
+```
+
+No body, colocar comentários como este:
+```bash
+    {
+    "COMENTARIO": "Excelente o atendimento"
+    }
+
+```
+
+Resposta pode vir assim:
+```bash
+    {
+    "AVALIACAO": 5
+    }
+```
+
 ***O que será feito - PyTorch***
 
 Utilizar PyTorch para treinar um modelo de IA que sugira consultas preventivas com base nos dados do cliente.

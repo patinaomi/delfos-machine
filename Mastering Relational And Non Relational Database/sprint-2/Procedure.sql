@@ -1,5 +1,6 @@
 
 
+
 -- Nome dos Integrantes: 
 -- Claudio Silva Bispo RM553472
 -- Patricia Naomi Yamagishi RM552981
@@ -394,7 +395,7 @@ EXEC solicitar_e_validar_data_nasc;
 EXEC avaliar_datas_nasc;
 
 
-// Procedures para Operações CRUD
+// Procedures para Operações CRUD - Segunda questão
 
 -- Procedure para INSERT na Tabela Cliente
 
@@ -470,7 +471,7 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Erro ao atualizar cliente: ' || SQLERRM);
 END;
 
--- Testar o Update na tabela Cliente
+-- Testar o Update
 
 select * from Cliente;
 
@@ -494,8 +495,79 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Erro ao deletar cliente: ' || SQLERRM);
 END;
 
--- Testar o Delete na tabela Cliente
+-- Testar o Delete
 
 EXEC deletar_cliente(1);
 select * from Cliente;
+
+-- Procedure para INSERT na Tabela Clinica
+
+CREATE OR REPLACE PROCEDURE inserir_clinica(
+    p_nome IN VARCHAR2,
+    p_endereco IN VARCHAR2,
+    p_telefone IN VARCHAR2,
+    p_avaliacao IN NUMBER,
+    p_preco_medio IN NUMBER
+) IS
+BEGIN
+    -- Inserir clínica
+    INSERT INTO Clinica (nome, endereco, telefone, avaliacao, preco_medio)
+    VALUES (p_nome, p_endereco, p_telefone, p_avaliacao, p_preco_medio);
+
+    DBMS_OUTPUT.PUT_LINE('Clínica inserida com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao inserir clínica: ' || SQLERRM);
+END;
+
+
+-- Procedure para UPDATE na Tabela Clinica
+
+CREATE OR REPLACE PROCEDURE atualizar_clinica(
+    p_id_clinica IN INTEGER,
+    p_nome IN VARCHAR2,
+    p_endereco IN VARCHAR2,
+    p_telefone IN VARCHAR2,
+    p_avaliacao IN DECIMAL,
+    p_preco_medio IN DECIMAL
+) IS
+BEGIN
+    -- Atualizar clínica
+    UPDATE Clinica
+    SET nome = p_nome,
+        endereco = p_endereco,
+        telefone = p_telefone,
+        avaliacao = p_avaliacao,
+        preco_medio = p_preco_medio
+    WHERE id_clinica = p_id_clinica;
+
+    DBMS_OUTPUT.PUT_LINE('Clínica atualizada com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao atualizar clínica: ' || SQLERRM);
+END;
+
+-- Procedure para DELETE na Tabela Clinica
+
+CREATE OR REPLACE PROCEDURE deletar_clinica(
+    p_id_clinica IN INTEGER
+) IS
+BEGIN
+    -- Deletar clínica
+    DELETE FROM Clinica
+    WHERE id_clinica = p_id_clinica;
+
+    DBMS_OUTPUT.PUT_LINE('Clínica deletada com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao deletar clínica: ' || SQLERRM);
+END;
+
+-- Deste para os próximos, vou conferir tudo de uma vez, visto que em Cliente funcionou.
+-- Testar os três processos
+
+select * from Clinica;
+EXEC inserir_clinica('Clínica Saude e Sorriso', 'Rua das Flores, 123', '11987654321', 4, 150);
+EXEC atualizar_clinica (1, 'Nome Atualizado da Clinica', 'Endereço Atualizado', '987654321', 5, 200);
+EXEC deletar_clinica(1);
 

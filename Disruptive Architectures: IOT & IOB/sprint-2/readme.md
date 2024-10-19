@@ -163,6 +163,59 @@ Processar Dados com Pandas: Utilizar a biblioteca Pandas para organizar e analis
 
 Classificação com Scikit-Learn: Utilizar Scikit-Learn para classificar as clínicas e especialistas com base nas avaliações de satisfação, além de agrupar os feedbacks em categorias, sendo excelente, bons e ruins.
 
+```bash 
+    import pandas as pd
+    from sklearn.model_selection import train_test_split
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.metrics import classification_report
+    from sklearn.utils import resample
+    import joblib
+
+    # Carregar os dados do arquivo CSV
+    #df_feedback_model = pd.read_csv('feedback_model_data.csv')
+
+    # Converter a coluna 'avaliacao' para o tipo inteiro
+    df_feedback_model['AVALIACAO'] = df_feedback_model['AVALIACAO'].astype(int)
+
+    # Balancear o conjunto de dados
+    df_majority = df_feedback_model[df_feedback_model['AVALIACAO'] == 4]
+    df_minority = df_feedback_model[df_feedback_model['AVALIACAO'] == 5]
+
+    df_minority_upsampled = resample(df_minority, 
+                                    replace=True,     # sample with replacement
+                                    n_samples=len(df_majority),    # to match majority class
+                                    random_state=42) # reproducible results
+
+    df_balanced = pd.concat([df_majority, df_minority_upsampled])
+
+    # Separar os dados em recursos (X) e rótulos (y)
+    X = df_balanced['COMENTARIO']
+    y = df_balanced['AVALIACAO']
+
+    # Dividir os dados em conjuntos de treinamento e teste
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    # Vetorização dos comentários usando TF-IDF
+    vectorizer = TfidfVectorizer(stop_words='english')
+    X_train_tfidf = vectorizer.fit_transform(X_train)
+    X_test_tfidf = vectorizer.transform(X_test)
+
+    # Treinar o modelo de classificação usando RandomForestClassifier com ajuste de hiperparâmetros
+    model = RandomForestClassifier(n_estimators=100, max_depth=10, random_state=42)
+    model.fit(X_train_tfidf, y_train)
+
+    # Fazer previsões no conjunto de teste
+    y_pred = model.predict(X_test_tfidf)
+
+    # Exibir o relatório de classificação
+    print(classification_report(y_test, y_pred))
+
+    # Salvar o modelo treinado e o vetor de palavras para uso posterior
+    joblib.dump(model, 'feedback_classification_model.pkl')
+    joblib.dump(vectorizer, 'tfidf_vectorizer.pkl')
+``` 
+
 ***O que será feito - Flask***
 
 Criar uma API com Flask para fornecer as sugestões de consultas ao aplicativo. Vamos realizar testes depois do modelo treinado, para saber se ele vai localizar na base comentários ruins para evitar sugestões de atendimentos ruins.

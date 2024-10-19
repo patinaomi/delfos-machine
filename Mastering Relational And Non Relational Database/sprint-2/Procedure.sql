@@ -1,6 +1,4 @@
 
-
-
 -- Nome dos Integrantes: 
 -- Claudio Silva Bispo RM553472
 -- Patricia Naomi Yamagishi RM552981
@@ -1213,3 +1211,437 @@ select * from Sinistro;
 EXEC inserir_sinistro(1, 'Sinistro Exemplo', 'Descrição do sinistro', 'S', 'Status do sinistro', 500, TO_DATE('2024-10-19', 'YYYY-MM-DD'), TO_DATE('2024-11-19', 'YYYY-MM-DD'), 'Documentação');
 EXEC atualizar_sinistro(11, 1, 'Sinistro Atualizado', 'Descrição atualizada', 'N', 'Status atualizado', 600, TO_DATE('2024-10-19', 'YYYY-MM-DD'), TO_DATE('2024-11-19', 'YYYY-MM-DD'), 'Documentação atualizada');
 EXEC deletar_sinistro(11);
+
+
+-- Procedure para INSERT na Tabela Estado_Civil
+
+select * from Estado_Civil;
+
+CREATE OR REPLACE PROCEDURE inserir_estado_civil(
+    p_descricao IN VARCHAR2
+) IS
+BEGIN
+    -- Inserir estado civil
+    INSERT INTO Estado_Civil (descricao)
+    VALUES (p_descricao);
+
+    DBMS_OUTPUT.PUT_LINE('Estado civil inserido com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao inserir estado civil: ' || SQLERRM);
+END;
+
+-- Procedure para UPDATE na Tabela Estado_Civil
+
+CREATE OR REPLACE PROCEDURE atualizar_estado_civil(
+    p_id_estado_civil IN INTEGER,
+    p_descricao IN VARCHAR2
+) IS
+BEGIN
+    -- Atualizar estado civil
+    UPDATE Estado_Civil
+    SET descricao = p_descricao
+    WHERE id_estado_civil = p_id_estado_civil;
+
+    DBMS_OUTPUT.PUT_LINE('Estado civil atualizado com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao atualizar estado civil: ' || SQLERRM);
+END;
+
+-- Procedure para DELETE na Tabela Estado_Civil
+
+CREATE OR REPLACE PROCEDURE deletar_estado_civil(
+    p_id_estado_civil IN INTEGER
+) IS
+BEGIN
+    -- Deletar estado civil
+    DELETE FROM Estado_Civil
+    WHERE id_estado_civil = p_id_estado_civil;
+
+    DBMS_OUTPUT.PUT_LINE('Estado civil deletado com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao deletar estado civil: ' || SQLERRM);
+END;
+
+
+
+-- Testes
+
+select * from Estado_Civil;
+
+EXEC inserir_estado_civil('Novo');
+EXEC atualizar_estado_civil(11, 'Enrolado');
+EXEC deletar_estado_civil(11);
+
+
+-- Procedure para INSERT na Tabela Formulario_Detalhado
+
+CREATE OR REPLACE PROCEDURE inserir_formulario_detalhado(
+    p_id_cliente IN INTEGER,
+    p_id_estado_civil IN INTEGER,
+    p_historico_familiar IN VARCHAR2,
+    p_profissao IN VARCHAR2,
+    p_renda_mensal IN NUMBER,
+    p_historico_medico IN VARCHAR2,
+    p_alergia IN VARCHAR2,
+    p_condicao_preexistente IN VARCHAR2,
+    p_uso_medicamento IN VARCHAR2,
+    p_familiar_com_doencas_dentarias IN VARCHAR2,
+    p_participacao_em_programas_preventivos IN CHAR,
+    p_contato_emergencial IN VARCHAR2,
+    p_pesquisa_satisfacao IN CHAR,
+    p_data_ultima_atualizacao IN DATE,
+    p_frequencia_consulta_periodica IN CHAR,
+    p_sinalizacao_de_risco IN VARCHAR2,
+    p_historico_de_viagem IN VARCHAR2,
+    p_historico_de_mudancas_de_endereco IN VARCHAR2,
+    p_preferencia_de_contato IN VARCHAR2
+) IS
+BEGIN
+    -- Inserir formulário detalhado
+    INSERT INTO Formulario_Detalhado (id_cliente, id_estado_civil, historico_familiar, profissao, renda_mensal, historico_medico, alergia, condicao_preexistente, uso_medicamento, familiar_com_doencas_dentarias, participacao_em_programas_preventivos, contato_emergencial, pesquisa_satisfacao, data_ultima_atualizacao, frequencia_consulta_periodica, sinalizacao_de_risco, historico_de_viagem, historico_de_mudancas_de_endereco, preferencia_de_contato)
+    VALUES (p_id_cliente, p_id_estado_civil, p_historico_familiar, p_profissao, p_renda_mensal, p_historico_medico, p_alergia, p_condicao_preexistente, p_uso_medicamento, p_familiar_com_doencas_dentarias, p_participacao_em_programas_preventivos, p_contato_emergencial, p_pesquisa_satisfacao, p_data_ultima_atualizacao, p_frequencia_consulta_periodica, p_sinalizacao_de_risco, p_historico_de_viagem, p_historico_de_mudancas_de_endereco, p_preferencia_de_contato);
+
+    DBMS_OUTPUT.PUT_LINE('Formulário detalhado inserido com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao inserir formulário detalhado: ' || SQLERRM);
+END;
+
+-- Procedure para UPDATE na Tabela Formulario_Detalhado
+
+CREATE OR REPLACE PROCEDURE atualizar_formulario_detalhado(
+    p_id_formulario IN INTEGER,
+    p_id_cliente IN INTEGER,
+    p_id_estado_civil IN INTEGER,
+    p_historico_familiar IN VARCHAR2,
+    p_profissao IN VARCHAR2,
+    p_renda_mensal IN NUMBER,
+    p_historico_medico IN VARCHAR2,
+    p_alergia IN VARCHAR2,
+    p_condicao_preexistente IN VARCHAR2,
+    p_uso_medicamento IN VARCHAR2,
+    p_familiar_com_doencas_dentarias IN VARCHAR2,
+    p_participacao_em_programas_preventivos IN CHAR,
+    p_contato_emergencial IN VARCHAR2,
+    p_pesquisa_satisfacao IN CHAR,
+    p_data_ultima_atualizacao IN DATE,
+    p_frequencia_consulta_periodica IN CHAR,
+    p_sinalizacao_de_risco IN VARCHAR2,
+    p_historico_de_viagem IN VARCHAR2,
+    p_historico_de_mudancas_de_endereco IN VARCHAR2,
+    p_preferencia_de_contato IN VARCHAR2
+) IS
+BEGIN
+    -- Atualizar formulário detalhado
+    UPDATE Formulario_Detalhado
+    SET id_cliente = p_id_cliente,
+        id_estado_civil = p_id_estado_civil,
+        historico_familiar = p_historico_familiar,
+        profissao = p_profissao,
+        renda_mensal = p_renda_mensal,
+        historico_medico = p_historico_medico,
+        alergia = p_alergia,
+        condicao_preexistente = p_condicao_preexistente,
+        uso_medicamento = p_uso_medicamento,
+        familiar_com_doencas_dentarias = p_familiar_com_doencas_dentarias,
+        participacao_em_programas_preventivos = p_participacao_em_programas_preventivos,
+        contato_emergencial = p_contato_emergencial,
+        pesquisa_satisfacao = p_pesquisa_satisfacao,
+        data_ultima_atualizacao = p_data_ultima_atualizacao,
+        frequencia_consulta_periodica = p_frequencia_consulta_periodica,
+        sinalizacao_de_risco = p_sinalizacao_de_risco,
+        historico_de_viagem = p_historico_de_viagem,
+        historico_de_mudancas_de_endereco = p_historico_de_mudancas_de_endereco,
+        preferencia_de_contato = p_preferencia_de_contato
+    WHERE id_formulario = p_id_formulario;
+
+    DBMS_OUTPUT.PUT_LINE('Formulário detalhado atualizado com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao atualizar formulário detalhado: ' || SQLERRM);
+END;
+
+-- Procedure para DELETE na Tabela Formulario_Detalhado
+
+CREATE OR REPLACE PROCEDURE deletar_formulario_detalhado(
+    p_id_formulario IN INTEGER
+) IS
+BEGIN
+    -- Deletar formulário detalhado
+    DELETE FROM Formulario_Detalhado
+    WHERE id_formulario = p_id_formulario;
+
+    DBMS_OUTPUT.PUT_LINE('Formulário detalhado deletado com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao deletar formulário detalhado: ' || SQLERRM);
+END;
+
+-- Teste
+
+select * from Formulario_Detalhado;
+
+EXEC inserir_formulario_detalhado(1, 1, 'Histórico Familiar', 'Profissão', 5000, 'Histórico Médico', 'Alergia', 'Condição Preexistente', 'Uso de Medicamento', 'Familiar com Doenças Dentárias', 'Y', 'Contato Emergencial', 'Y', TO_DATE('2024-10-19', 'YYYY-MM-DD'), 'Y', 'Sinalização de Risco', 'Histórico de Viagem', 'Histórico de Mudanças de Endereço', 'Preferência de Contato');
+EXEC atualizar_formulario_detalhado(10, 1, 1, 'Histórico Familiar Atualizado', 'Profissão Atualizada', 6000, 'Histórico Médico Atualizado', 'Alergia Atualizada', 'Condição Preexistente Atualizada', 'Uso de Medicamento Atualizado', 'Familiar com Doenças Dentárias Atualizado', 'N', 'Contato Emergencial Atualizado', 'N', TO_DATE('2024-10-20', 'YYYY-MM-DD'), 'N', 'Sinalização de Risco Atualizada', 'Histórico de Viagem Atualizado', 'Histórico de Mudanças de Endereço Atualizado', 'Preferência de Contato Atualizada');
+EXEC deletar_formulario_detalhado(1);
+
+-- Procedure para INSERT na Tabela Tipo_Notificacao
+
+CREATE OR REPLACE PROCEDURE inserir_tipo_notificacao(
+    p_descricao IN VARCHAR2
+) IS
+BEGIN
+    -- Inserir tipo de notificação
+    INSERT INTO Tipo_Notificacao (descricao)
+    VALUES (p_descricao);
+
+    DBMS_OUTPUT.PUT_LINE('Tipo de notificação inserido com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao inserir tipo de notificação: ' || SQLERRM);
+END;
+
+-- Procedure para UPDATE na Tabela Tipo_Notificacao
+
+CREATE OR REPLACE PROCEDURE atualizar_tipo_notificacao(
+    p_id_tipo_notificacao IN INTEGER,
+    p_descricao IN VARCHAR2
+) IS
+BEGIN
+    -- Atualizar tipo de notificação
+    UPDATE Tipo_Notificacao
+    SET descricao = p_descricao
+    WHERE id_tipo_notificacao = p_id_tipo_notificacao;
+
+    DBMS_OUTPUT.PUT_LINE('Tipo de notificação atualizado com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao atualizar tipo de notificação: ' || SQLERRM);
+END;
+
+-- Procedure para DELETE na Tabela Tipo_Notificacao
+
+CREATE OR REPLACE PROCEDURE deletar_tipo_notificacao(
+    p_id_tipo_notificacao IN INTEGER
+) IS
+BEGIN
+    -- Deletar tipo de notificação
+    DELETE FROM Tipo_Notificacao
+    WHERE id_tipo_notificacao = p_id_tipo_notificacao;
+
+    DBMS_OUTPUT.PUT_LINE('Tipo de notificação deletado com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao deletar tipo de notificação: ' || SQLERRM);
+END;
+
+-- Testes
+
+select * from Tipo_Notificacao;
+
+EXEC inserir_tipo_notificacao('Aviso');
+EXEC atualizar_tipo_notificacao(11, 'Alerta');
+EXEC deletar_tipo_notificacao(11);
+
+-- Procedure para INSERT na Tabela Agenda
+
+CREATE OR REPLACE PROCEDURE inserir_agenda(
+    p_id_cliente IN INTEGER,
+    p_id_consulta IN INTEGER,
+    p_status_consulta IN CHAR,
+    p_observacoes IN VARCHAR2
+) IS
+BEGIN
+    -- Inserir agenda
+    INSERT INTO Agenda (id_cliente, id_consulta, status_consulta, observacoes)
+    VALUES (p_id_cliente, p_id_consulta, p_status_consulta, p_observacoes);
+
+    DBMS_OUTPUT.PUT_LINE('Agenda inserida com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao inserir agenda: ' || SQLERRM);
+END;
+
+-- Procedure para UPDATE na Tabela Agenda
+
+CREATE OR REPLACE PROCEDURE atualizar_agenda(
+    p_id_agenda IN INTEGER,
+    p_id_cliente IN INTEGER,
+    p_id_consulta IN INTEGER,
+    p_status_consulta IN CHAR,
+    p_observacoes IN VARCHAR2
+) IS
+BEGIN
+    -- Atualizar agenda
+    UPDATE Agenda
+    SET id_cliente = p_id_cliente,
+        id_consulta = p_id_consulta,
+        status_consulta = p_status_consulta,
+        observacoes = p_observacoes
+    WHERE id_agenda = p_id_agenda;
+
+    DBMS_OUTPUT.PUT_LINE('Agenda atualizada com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao atualizar agenda: ' || SQLERRM);
+END;
+
+
+-- Procedure para DELETE na Tabela Agenda
+
+CREATE OR REPLACE PROCEDURE deletar_agenda(
+    p_id_agenda IN INTEGER
+) IS
+BEGIN
+    -- Deletar agenda
+    DELETE FROM Agenda
+    WHERE id_agenda = p_id_agenda;
+
+    DBMS_OUTPUT.PUT_LINE('Agenda deletada com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao deletar agenda: ' || SQLERRM);
+END;
+
+-- Testes
+
+select * from Agenda;
+
+EXEC inserir_agenda(1, 1, 'S', 'Consulta de rotina');
+EXEC atualizar_agenda(11, 1, 1, 'N', 'Consulta cancelada');
+EXEC deletar_agenda(11);
+
+
+-- Procedure para INSERT na Tabela Notificacao
+
+CREATE OR REPLACE PROCEDURE inserir_notificacao(
+    p_id_cliente IN INTEGER,
+    p_id_tipo_notificacao IN INTEGER,
+    p_mensagem IN VARCHAR2,
+    p_data_envio IN DATE
+) IS
+BEGIN
+    -- Inserir notificação
+    INSERT INTO Notificacao (id_cliente, id_tipo_notificacao, mensagem, data_envio)
+    VALUES (p_id_cliente, p_id_tipo_notificacao, p_mensagem, p_data_envio);
+
+    DBMS_OUTPUT.PUT_LINE('Notificação inserida com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao inserir notificação: ' || SQLERRM);
+END;
+
+-- Procedure para UPDATE na Tabela Notificacao
+
+CREATE OR REPLACE PROCEDURE atualizar_notificacao(
+    p_id_notificacao IN INTEGER,
+    p_id_cliente IN INTEGER,
+    p_id_tipo_notificacao IN INTEGER,
+    p_mensagem IN VARCHAR2,
+    p_data_envio IN DATE
+) IS
+BEGIN
+    -- Atualizar notificação
+    UPDATE Notificacao
+    SET id_cliente = p_id_cliente,
+        id_tipo_notificacao = p_id_tipo_notificacao,
+        mensagem = p_mensagem,
+        data_envio = p_data_envio
+    WHERE id_notificacao = p_id_notificacao;
+
+    DBMS_OUTPUT.PUT_LINE('Notificação atualizada com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao atualizar notificação: ' || SQLERRM);
+END;
+
+-- Procedure para DELETE na Tabela Notificacao
+
+CREATE OR REPLACE PROCEDURE deletar_notificacao(
+    p_id_notificacao IN INTEGER
+) IS
+BEGIN
+    -- Deletar notificação
+    DELETE FROM Notificacao
+    WHERE id_notificacao = p_id_notificacao;
+
+    DBMS_OUTPUT.PUT_LINE('Notificação deletada com sucesso.');
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro ao deletar notificação: ' || SQLERRM);
+END;
+
+-- Testes
+
+select * from Notificacao;
+
+EXEC inserir_notificacao(1, 1, 'Sua consulta está agendada para amanhã.', TO_DATE('2024-10-19', 'YYYY-MM-DD'));
+EXEC atualizar_notificacao(11, 1, 1, 'Sua consulta foi reagendada.', TO_DATE('2024-10-20', 'YYYY-MM-DD'));
+EXEC deletar_notificacao(11);
+
+
+// Função com Cursor e Joins para Relatório Formatado
+
+-- Função para os relatório de Consultas -- Neste processo, tudo foi finalizado já.
+-- Relatório com informações de consultas, incluindo detalhes do cliente, dentista e clínica.
+-- JOINs entre as tabelas Consulta, Cliente, Dentista e Clinica.
+
+CREATE OR REPLACE FUNCTION relatorio_consultas RETURN SYS_REFCURSOR IS
+    v_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN v_cursor FOR
+        SELECT c.id_consulta,
+               cl.nome AS nome_cliente,
+               cl.sobrenome AS sobrenome_cliente,
+               d.nome AS nome_dentista,
+               d.sobrenome AS sobrenome_dentista,
+               clc.nome AS nome_clinica,
+               c.tipo_servico,
+               c.data_consulta,
+               c.status_consulta,
+               c.observacoes,
+               c.sintomas,
+               c.tratamento_recomendado,
+               c.custo,
+               c.prescricao,
+               c.data_retorno
+        FROM Consulta c
+        JOIN Cliente cl ON c.id_cliente = cl.id_cliente
+        JOIN Dentista d ON c.id_dentista = d.id_dentista
+        JOIN Clinica clc ON c.id_clinica = clc.id_clinica;
+    RETURN v_cursor;
+END;
+
+-- Teste
+-- Gera um relatório formatado com informações detalhadas sobre as consultas.
+VARIABLE rc REFCURSOR;
+EXEC :rc := relatorio_consultas;
+PRINT rc;
+
+// Função para relatório com regra de negócio
+
+-- Vamos criar uma função que gera um relatório com a contagem de consultas por clínica, incluindo a soma dos custos das consultas. 
+-- Isso pode ajudar a entender a carga de trabalho e a receita gerada por cada clínica.
+
+CREATE OR REPLACE FUNCTION relatorio_consultas_por_clinica RETURN SYS_REFCURSOR IS
+    v_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN v_cursor FOR
+        SELECT clc.nome AS nome_clinica,
+               COUNT(c.id_consulta) AS total_consultas,
+               SUM(c.custo) AS receita_total
+        FROM Consulta c
+        JOIN Clinica clc ON c.id_clinica = clc.id_clinica
+        GROUP BY clc.nome
+        ORDER BY total_consultas DESC;
+    RETURN v_cursor;
+END;
+
+-- Teste
+
+VARIABLE rc REFCURSOR;
+EXEC :rc := relatorio_consultas_por_clinica;
+PRINT rc;

@@ -109,7 +109,7 @@ public class ClienteController {
                     .build();
 
             clienteResponse.add(linkTo(methodOn(ClienteController.class).buscarPorId(id)).withSelfRel());
-            return ResponseEntity.ok(cliente);
+            return ResponseEntity.ok(clienteResponse);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID " + id + " não encontrado.");
         } catch (Exception e) {
